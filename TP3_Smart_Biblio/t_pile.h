@@ -24,7 +24,7 @@
 
 typedef enum {AUCUN = 0, FICTION = 1, HISTOIRE = 2, SCIENCE = 3, ENFANTS = 4, INFORMATIQUE = 5} t_genre;
 
-typedef struct
+/*typedef struct
 {
     t_genre genre;
     int nb_pages;
@@ -33,7 +33,7 @@ typedef struct
     char titre[TAILLE_TITRE];
     int isbn;
     int bEmprunte; // 1: Le livre a ete emprunte, 0: le livre est disponible.
-} t_livre;
+} t_livre;*/
 
 //changer cette déclaration pour obtenir des piles d'un autre type
 typedef t_livre t_element;
