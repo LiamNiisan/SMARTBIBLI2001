@@ -1,6 +1,16 @@
+#ifndef _T_BIBLIO__
+#define _T_BIBLIO__
 
 
+#define NB_LIVRES_MAX_RANGEE        100
+#define NB_GENRES                   6
+#define BIBLIO_FICHIER				"biblio.txt"
 
+#define TAILLE_TITRE	80
+#define TAILLE_NOM		30
+#define TAILLE_PRENOM	30
+
+typedef enum { AUCUN = 0, FICTION = 1, HISTOIRE = 2, SCIENCE = 3, ENFANTS = 4, INFORMATIQUE = 5 } t_genre;
 
 typedef struct
 {

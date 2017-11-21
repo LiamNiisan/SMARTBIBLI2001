@@ -1,3 +1,8 @@
+#include "t_biblio.h"
+
+#ifndef _T_BIBLIO_CHARIOT__
+#define _T_BIBLIO_CHARIOT__
+
 #define POS_KIOSK 0
 #define POS_DEPLACEMENT 1
 

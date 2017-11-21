@@ -1,7 +1,7 @@
-//TO BE CONTINUED
+#include "t_biblio.h"
 
-#include "t_biblio_machine.c"
-
+#ifndef _T_BIBLIO_MACHINE__
+#define _T_BIBLIO_MACHINE__
 
 typedef struct {
 

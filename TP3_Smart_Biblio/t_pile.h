@@ -22,7 +22,7 @@
 #define TAILLE_PRENOM	30
 
 
-typedef enum {AUCUN = 0, FICTION = 1, HISTOIRE = 2, SCIENCE = 3, ENFANTS = 4, INFORMATIQUE = 5} t_genre;
+//typedef enum {AUCUN = 0, FICTION = 1, HISTOIRE = 2, SCIENCE = 3, ENFANTS = 4, INFORMATIQUE = 5} t_genre;
 
 /*typedef struct
 {
