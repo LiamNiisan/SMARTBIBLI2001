@@ -10,7 +10,7 @@
 
 int main()
 {
-    //t_etudiant lol;
-    //etudiant_servir(&lol);
+    t_etudiant lol;
+    etudiant_servir(&lol);
     return 0;
 }

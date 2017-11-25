@@ -40,3 +40,6 @@ typedef struct
 	//t_pile retours;
 	t_rapport rapport;
 } t_bibliotheque;
+
+#endif
+

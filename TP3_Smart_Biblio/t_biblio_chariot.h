@@ -23,3 +23,5 @@ void chariot_get_vitesse(int vitesse);
 
 int chariot_set_vitesse();
 
+#endif
+
