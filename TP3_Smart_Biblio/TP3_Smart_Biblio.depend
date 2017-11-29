@@ -33,7 +33,7 @@
 	"t_biblio_robot.h"
 	"t_pile.h"
 
-1511643529 d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio.h
+1511988867 d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio.h
 
 1511643410 d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio_chariot.h
 	"t_biblio.h"
@@ -58,4 +58,7 @@
 
 1511643312 source:d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio_robot.c
 	"t_biblio_robot.h"
+
+1511643312 source:d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_pile.c
+	"t_pile.h"
 
