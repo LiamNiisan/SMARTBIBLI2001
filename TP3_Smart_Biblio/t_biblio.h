@@ -10,6 +10,14 @@
 #define TAILLE_NOM		30
 #define TAILLE_PRENOM	30
 
+
+#define MAX_ISBN		9999
+
+#define SIMULATION      1
+
+#define EMPRUNT         1
+#define DISPONIBLE      0
+
 typedef enum { AUCUN = 0, FICTION = 1, HISTOIRE = 2, SCIENCE = 3, ENFANTS = 4, INFORMATIQUE = 5 } t_genre;
 
 typedef struct
@@ -41,5 +49,28 @@ typedef struct
 	t_rapport rapport;
 } t_bibliotheque;
 
+
+
+
+
+void initialiser_bibliotheque(t_bibliotheque * pBibli);
+
+void initialiser_rapport(t_bibliotheque * pBibli);
+
+void generer_rapport(t_bibliotheque * pBibli);
+
+int verifier_disp_bibliotheque(t_bibliotheque * pBibli);
+
+void lire_fichier(t_bibliotheque * pBibli, int * lecture);
+
+void emprunter_livre(t_bibliotheque * pBibli);
+
+void retirer_sautligne(char * chaine);
+
+void super_pause();
+
+
+
 #endif
+
 
