@@ -8,7 +8,7 @@
 #include "t_pile.h"
 
 
-void remise_partielle(t_bibliotheque * pbiblio);
+//void remise_partielle(t_bibliotheque * pbiblio);
 
 
 int main()
@@ -17,19 +17,54 @@ int main()
     t_bibliotheque biblio;
 
     //menu fonctionelle avec generation d'un user random
-    etudiant_servir(&etudiant,&biblio);
+    //etudiant_servir(&etudiant,&biblio);
     //remise_partielle(&biblio);
 
+    int choix_menu = 0;
 
+    do
+	{
+	    // Gestion du menu.
+		choix_menu = afficher_menu_principal();
 
-
-
-
+		switch (choix_menu)
+		{
+		case 1: afficher_menu_bibliotheque(); break;
+		case 2: etudiant_servir(&etudiant,&biblio); break;
+		case 0: break; // Quitter.
+		default: exit(0); break;
+		}
+	} while (choix_menu != 0);
 
     return 0;
 }
 
-void remise_partielle(t_bibliotheque * pbiblio){
+
+void afficher_menu_principal()
+{
+    system("cls");//efface l'ecran
+
+    int choix_user=0; //variable pour le choix
+
+	printf("================================================================================\n");
+	printf("                           SMART Bibliotheque 2000 ULTRA\n");
+	printf("================================================================================\n");
+
+	printf("1 - Bibliotheque\n");
+	printf("2 - Kiosque\n");
+    printf("0 - Quitter");
+    printf("\n\n");
+
+	printf("================================================================================\n");
+
+    do{
+        scanf("%d",&choix_user);
+
+    }while(choix_user < 0 || choix_user > 9); //limite du choix de l'utilisateur
+}
+
+
+/*void remise_partielle(t_bibliotheque * pbiblio){
 
     int lecturefichier=0; //verification de la lecture fichier
 
@@ -41,4 +76,4 @@ void remise_partielle(t_bibliotheque * pbiblio){
     generer_rapport(&pbiblio);
 
 
-}
+}*/

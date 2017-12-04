@@ -11,9 +11,9 @@ int chariot_ajouter_livre(t_livre livre);
 
 void chariot_retirer_livre(int ISBN);
 
-void chariot_emprunter_livre();
+void chariot_emprunter_livre(int ISBN);
 
-void chariot_retourner_livre();
+void chariot_retourner_livre(int ISBN);
 
 int chariot_get_pos();
 

@@ -20,6 +20,9 @@ typedef struct {
 }t_etudiant;
 
 
+
+int afficher_menu_kiosque();
+
 void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * biblio);
 
 void etudiant_chercher_livre();
