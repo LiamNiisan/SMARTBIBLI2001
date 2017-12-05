@@ -24,7 +24,7 @@
 
 1511283235 c:\users\ap06920\desktop\smartbibli2001-master\tp3_smart_biblio\t_pile.h
 
-1512344382 source:d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\main.c
+1512411725 source:d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\main.c
 	<stdio.h>
 	<stdlib.h>
 	"t_biblio.h"
@@ -33,12 +33,12 @@
 	"t_biblio_robot.h"
 	"t_pile.h"
 
-1512343944 d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio.h
+1512405869 d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio.h
 
-1512348154 d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio_chariot.h
+1512409201 d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio_chariot.h
 	"t_biblio.h"
 
-1512347386 d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio_machine.h
+1512421873 d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio_machine.h
 	"t_biblio.h"
 
 1511643405 d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio_robot.h
@@ -47,18 +47,20 @@
 1511643525 d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_pile.h
 	"t_biblio.h"
 
-1512347068 source:d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio.c
+1512411242 source:d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio.c
 	"t_biblio.h"
 	"t_pile.h"
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
 
-1511643312 source:d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio_chariot.c
+1512411940 source:d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio_chariot.c
 	"t_biblio_chariot.h"
+	"t_biblio.h"
 
-1511988867 source:d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio_machine.c
+1512424595 source:d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio_machine.c
 	"t_biblio_machine.h"
+	"t_biblio_chariot.h"
 
 1511643312 source:d:\documents\ets\aut2017\inf145\tp\tp3\tp3_smart_biblio\t_biblio_robot.c
 	"t_biblio_robot.h"

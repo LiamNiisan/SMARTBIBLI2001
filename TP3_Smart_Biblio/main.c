@@ -14,11 +14,25 @@
 int main()
 {
     t_etudiant etudiant;
-    t_bibliotheque biblio;
+    //t_bibliotheque biblio;
+
+    t_bibliotheque bibli; //fichier principale de bibliotheque
+
+    t_livre * chariot_livres;
+
+    int compteur_nb_livre_chariot = 0;
 
     //menu fonctionelle avec generation d'un user random
     //etudiant_servir(&etudiant,&biblio);
     //remise_partielle(&biblio);
+
+    // Initialisation de la bibliotheque
+	initialiser_bibliotheque(&bibli);
+
+    //initialisation du rapport
+    initialiser_rapport(&bibli);
+
+
 
     int choix_menu = 0;
 
@@ -29,10 +43,11 @@ int main()
 
 		switch (choix_menu)
 		{
-		case 1: afficher_menu_bibliotheque(); break;
-		case 2: etudiant_servir(&etudiant,&biblio); break;
-		case 0: break; // Quitter.
-		default: exit(0); break;
+            case 1: afficher_menu_bibliotheque(&bibli); break;
+            case 2: etudiant_servir(&etudiant,&bibli, chariot_livres, &compteur_nb_livre_chariot); break;
+            case 3: simulateur(&bibli); break;
+            case 0: break; // Quitter.
+            default: exit(0); break;
 		}
 	} while (choix_menu != 0);
 
@@ -52,6 +67,7 @@ void afficher_menu_principal()
 
 	printf("1 - Bibliotheque\n");
 	printf("2 - Kiosque\n");
+	printf("3 - Simulateur\n");
     printf("0 - Quitter");
     printf("\n\n");
 
@@ -60,11 +76,11 @@ void afficher_menu_principal()
     do{
         scanf("%d",&choix_user);
 
-    }while(choix_user < 0 || choix_user > 9); //limite du choix de l'utilisateur
+    }while(choix_user < 0 || choix_user > 3); //limite du choix de l'utilisateur
 }
 
 
-/*void remise_partielle(t_bibliotheque * pbiblio){
+void simulateur(t_bibliotheque * pbiblio){
 
     int lecturefichier=0; //verification de la lecture fichier
 
@@ -74,6 +90,4 @@ void afficher_menu_principal()
     generer_rapport(&pbiblio);
     emprunter_livre(&pbiblio);
     generer_rapport(&pbiblio);
-
-
-}*/
+}

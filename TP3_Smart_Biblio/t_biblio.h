@@ -228,6 +228,9 @@ void super_pause();
 //*****************************************************************************/
 int verifier_disp_bibliotheque(t_bibliotheque * pBibli);
 
+int chercher_livre(int isbn, t_bibliotheque * pBibli, t_livre * temp_livre);
+
+void emprunter_livre_isbn(int isbn, t_bibliotheque * pBibli);
 
 
 #endif
