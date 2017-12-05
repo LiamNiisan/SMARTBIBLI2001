@@ -79,7 +79,7 @@ void afficher_menu_principal()
     }while(choix_user < 0 || choix_user > 3); //limite du choix de l'utilisateur
 }
 
-
+//remise partielle
 void simulateur(t_bibliotheque * pbiblio){
 
     int lecturefichier=0; //verification de la lecture fichier
@@ -87,6 +87,7 @@ void simulateur(t_bibliotheque * pbiblio){
     initialiser_bibliotheque(&pbiblio);
     initialiser_rapport(&pbiblio);
     lire_fichier(&pbiblio,&lecturefichier);
+
     generer_rapport(&pbiblio);
     emprunter_livre(&pbiblio);
     generer_rapport(&pbiblio);
