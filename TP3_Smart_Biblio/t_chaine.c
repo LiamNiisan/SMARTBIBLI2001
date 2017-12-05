@@ -1,82 +1,98 @@
-// Exemple de gestion d'une liste chaînée simple
+#include "t_chaine.h"
 
-#include <stdio.h>
-#include <conio.h>
-#include <stdlib.h>
-#include <time.h>
-
-#define  MAX  10
-
-/********************************************************************/
-/*					            DEFINITION DES TYPES						            */
-/********************************************************************/
-
-typedef int            objet;
-typedef struct noeud * lien;
-
-struct noeud {
-   objet data;
-   lien  suivant;
-};
-
-/********************************************************************/
-/*          Déclarations des fonctions de gestion de liste          */
-/********************************************************************/
-
-   void ajouter(lien *, lien *, objet);
-   int  retire_le_i(const lien *, int, objet *);
-   void retire_du_debut(lien *);
 
 /********************************************************************/
 /*					           	PROGRAMME PRINCIPAL 					             	*/
 /********************************************************************/
 
-int main(void)
-{  lien  tete=NULL, fin;  //pointeur sur la tete et la fin de la liste
-   int   nbelem=0,        //nombre d'éléments de la liste
-		     i, valeur;
+/*int main(void)
+{  lien  tete;    //pointeur sur la tete de la liste
 
-   srand(time(NULL));
-
-	 //remplir la liste aléatoirement
-	 for (i=0; i<MAX; i++){
-		 valeur = rand() % 100;
-		 ajouter(&tete, &fin, valeur);
-     nbelem++;
-	 }
-
-	 //afficher la liste
-   for (i=0; i<nbelem; i++){
-     retire_le_i(&tete, i, &valeur);
-		 printf("%d --> ", valeur);
-	 }
-	 printf("NULL\n");
-
-   //tester quelques requêtes
-	 if (retire_le_i(&tete, 6, &valeur))
-		 printf("\nLe #6 est %d\n", valeur);
-
-   if (retire_le_i(&tete, 11, &valeur))
-		 printf("\nLe #11 est %d\n", valeur);
-
-	 //effacer la liste
-	 while (nbelem){
-     retire_du_debut(&tete);
-		 nbelem--;
-	 }
-
-	 system("pause");
-	 return 0;
-}
+   creer(&tete);                  afficher(tete);  getch();
+   insere_au_debut(&tete, 75);    afficher(tete);  getch();
+   insere_a_la_fin(&tete,  5);    afficher(tete);  getch();
+   insere(&tete, 25);             afficher(tete);  getch();
+   retire(&tete, 40);             afficher(tete);  getch();
+   retire(&tete, 41);             afficher(tete);  getch();
+   retire_du_debut(&tete);        afficher(tete);  getch();
+   retire_de_la_fin(&tete);       afficher(tete);  getch();
+   trier(tete);                   afficher(tete);  getch();
+   return 0;
+}*/
 
 /********************************************************************/
 /*						         DEFINITION DES FONCTIONS				            	*/
 /********************************************************************/
 
+//Fonction qui va créer la liste suivante: 50 --> 40 --> 30 --> 20 --> 10 --> NULL
+void creer(lien *tete)
+{
+    lien p;
+   //int  i;
+
+   /**tete = NULL;
+   //for (i=1; i<=5; i++) {
+    p = (lien) malloc(sizeof(struct noeud));
+    if (p == NULL)  { *tete = NULL;  return; }   //valider l'allocation dynamique
+
+    //p->data.isbn    = NULL ;
+    p->suivant = *tete;   //on attache le nouveau noeud DEVANT la tete
+    *tete       = p;
+   //}*/
+
+   p = NULL;
+}
+
+/********************************************************************/
+//Fonction qui va compter le nombre d'éléments dans la liste chaînée
+int compte(lien tete)
+{  lien p=tete;
+   int  n=0;
+
+   while (p != NULL) {
+	   n++;
+	   p = p->suivant;
+   }
+   return n;
+}
+
+/********************************************************************/
+//Fonction qui va afficher le contenu de la liste
+void afficher(lien tete)
+{
+   lien p=tete;
+   while (p != NULL) {
+	   printf("-------------------------------\n");
+       printf("Titre: %s \n",     p->data.titre);
+       printf("Auteur: %s %s \n", p->data.auteur_prenom, p->data.auteur_nom);
+       printf("Genre: %d \n",     p->data.genre);
+       printf("Pages: %d \n",     p->data.nb_pages);
+       printf("ISBN: %d \n",      p->data.isbn);
+       printf("Emprunte: %d \n",  p->data.bEmprunte);
+       printf("-------------------------------\n");
+	   p = p->suivant;
+   }
+   printf("\n\nLe chariot contient %d livre(s)\n\n\n", compte(tete));
+}
+
+/********************************************************************/
+//Fonction qui crée un nouveau noeud avec la valeur "x" et qui va
+//placer ce noeud DEVANT la tete de liste reçue en paramètre
+void insere_au_debut(lien *tete, objet x)
+{ lien p;
+
+  p = (lien) malloc(sizeof(struct noeud));
+  if (p == NULL)  return;   //valider l'allocation dynamique
+
+  p->data    = x;
+  p->suivant = *tete;
+  *tete      = p;
+}
+
 /********************************************************************/
 //Fonction qui crée un nouveau noeud avec la valeur "x" et qui va
 //placer ce noeud à la fin de la liste reçue en paramètre
-void ajouter(lien *tete, lien *fin, objet x)
+void insere_a_la_fin(lien *tete, objet x)
 { lien p, q;
 
   p = (lien) malloc(sizeof(struct noeud));
@@ -84,55 +100,128 @@ void ajouter(lien *tete, lien *fin, objet x)
 
   p->data = x;
   if (*tete == NULL) {   //si la liste reçue est vide..
-     *tete = *fin = p;     //ce premier noeud est la tete ET la fin de liste
+     *tete       = p;
      p->suivant = NULL;
   }
   else {                 //sinon, on va ajouter à la fin
-     q = *fin;
+     q = *tete;
+     while (q->suivant != NULL)  //boucle pour aller jusqu'au DERNIER noeud
+	     q = q->suivant;
 
      p->suivant = NULL;
      q->suivant = p;
-		 *fin = p;           //déplacer la fin de liste
   }
 }
 
+/********************************************************************/
+//Fonction qui insérer un nouveau noeud avec la valeur "x" dans la
+//liste reçue en paramètre de façon à ce que cette liste reste
+//ordonnée en ordre DÉCROISSANT
+void insere(lien *tete, objet x)
+{ lien  ici, next, p;
+
+  p = (lien) malloc(sizeof(struct noeud));
+  if (p == NULL)  return;   //valider l'allocation dynamique
+
+  p->data = x;
+  ici = NULL;
+  next = *tete;
+  while ((next != NULL) && (next->data.isbn > x.isbn)) {  //trouver position oû on va insérer
+    ici = next;
+    next = next->suivant;
+  }
+
+  if (ici == NULL) {      //on va insérer au début d la liste
+    p->suivant = *tete;
+    *tete = p;
+  }
+  else {                  //sinon, on insère dans la liste
+    p->suivant = ici->suivant;
+    ici->suivant = p;
+  }
+}
 
 /********************************************************************/
 //Fonction qui enlève le PREMIER noeud de la liste reçue en parametre
 void retire_du_debut(lien *tete)
 { lien p= *tete;
-
-  if (*tete != NULL) {
-     *tete = p->suivant;
-     free(p);
-  }
+  if (*tete != NULL)
+	{ *tete = p->suivant;  free(p); }
 }
 
 
 /********************************************************************/
-//Fonction qui récupère la valeur du noeud #n de la liste
-int retire_le_i(const lien *tete, int n, objet *val)
-{ lien ici = *tete;  //pointeur temporaire pour traverser la liste
-  int  no=0;
+//Fonction qui enlève le noeud de la liste qui contient la valeur "n"
+void retire(lien *tete, objet n)
+{ lien ici= *tete, avant=NULL;
 
-	if (ici == NULL){
-		printf("\nOn ne peut pas retirer l'objet #%d: la liste est vide\n\n", n);
-		return 0;
-	}
+  if (ici == NULL)
+    printf("\nOn ne peut pas retire l'objet %d: la liste est vide\n\n", n);
   else {
-    /* Boucle pour retrouver la valeur #n dans la liste */
-    while ((ici != NULL) && (no < n)) {
+    /* Boucle pour retrouver la valeur "n" dans la liste */
+    while ((ici != NULL) && (ici->data.isbn != n.isbn)) {
+      avant = ici;
       ici = ici->suivant;
-			no++;
     }
-		if (ici == NULL){
+
+    if (ici == NULL)
        printf("\nIl n'y a pas d'item numero %d !!!\n\n", n);
-       return 0;
-		}
     else {
-	     *val = ici->data;  //on récupère cette valeur
-			 return 1;
+	   //Rétablir les liens avant de détruire ce noeud..
+       if (ici == *tete) *tete = ici->suivant;
+       else     avant->suivant = ici->suivant;
+       free(ici);
     }
   }
 }
 
+/********************************************************************/
+//Fonction qui enlève le DERNIER noeud de la liste reçue en parametre
+void retire_de_la_fin(lien *tete)
+{ lien ici= *tete, avant=NULL;
+
+  if (ici == NULL)
+    printf("\nOn ne peut pas retire d'objet: la liste est vide\n\n");
+  else {
+    while (ici->suivant != NULL) {  //trouver le DERNIER noeud
+      avant = ici;
+      ici = ici->suivant;
+    }
+
+    if (ici == *tete) *tete = NULL;
+    else     avant->suivant = NULL;
+    free(ici);
+  }
+}
+
+/********************************************************************/
+//Fonction qui échange deux valeurs (pour le tri)
+void permute(objet *a, objet *b){
+  objet temp=*a;
+  *a = *b; *b = temp;
+}
+
+/********************************************************************/
+//Fonction qui va trier une liste chaînée avec l'algorithme
+//du Tri par Sélection.
+//PARAMETRE:  liste - pointeur vers la liste à trier
+void trier(lien liste){
+  lien p=liste, q, min;   /* "p" pointe sur le premier noeud */
+
+  while (p->suivant != NULL) {    /* on ira jusqu'au dernier noeud */
+    q = p->suivant;
+    min = p;
+
+    /* boucle pour trouver la valeur minimale du reste de la liste */
+    while (q != NULL) {
+      if (q->data.isbn < min->data.isbn) min = q;
+      q = q->suivant;
+    }
+
+    /* On échange ce minimum avec le .data du noeud pointé par "p" */
+    permute(&p->data, &min->data);
+    p = p->suivant;     /* on passe au noeud suivant.. */
+  }
+}
+/********************************************************************/
+/********************************************************************/

@@ -6,6 +6,7 @@
 #include "t_biblio_machine.h"
 #include "t_biblio_robot.h"
 #include "t_pile.h"
+#include "t_chaine.h"
 
 
 //void remise_partielle(t_bibliotheque * pbiblio);
@@ -20,7 +21,20 @@ int main()
 
     t_livre * chariot_livres;
 
-    int compteur_nb_livre_chariot = 0;
+    int compteur_nb_noeudlivre_chariot = 0;
+
+    lien  tete;
+    creer(&tete);
+
+    /*t_livre test;
+
+    strcpy(test.auteur_nom, "YO");
+    strcpy(test.auteur_prenom, "LO");
+    strcpy(test.titre, "BOOM");
+    test.isbn = 666;*/
+
+    /*insere_au_debut(&tete, test);
+    afficher(tete);  getch()*/;
 
     //menu fonctionelle avec generation d'un user random
     //etudiant_servir(&etudiant,&biblio);
@@ -44,8 +58,8 @@ int main()
 		switch (choix_menu)
 		{
             case 1: afficher_menu_bibliotheque(&bibli); break;
-            case 2: etudiant_servir(&etudiant,&bibli, chariot_livres, &compteur_nb_livre_chariot); break;
-            case 3: simulateur(&bibli); break;
+            case 2: etudiant_servir(&etudiant,&bibli, &tete); break;
+            case 3: simulateur(&bibli, &tete); break;
             case 0: break; // Quitter.
             default: exit(0); break;
 		}
@@ -80,15 +94,33 @@ void afficher_menu_principal()
 }
 
 //remise partielle
-void simulateur(t_bibliotheque * pbiblio){
+void simulateur(t_bibliotheque * pbiblio, lien * tete){
 
     int lecturefichier=0; //verification de la lecture fichier
 
+    printf("\nInitialisation en cours...\n");
     initialiser_bibliotheque(&pbiblio);
     initialiser_rapport(&pbiblio);
+
+    printf("Lecture en cours...\n");
     lire_fichier(&pbiblio,&lecturefichier);
 
+    printf("Generer le rapport initial\n");
     generer_rapport(&pbiblio);
-    emprunter_livre(&pbiblio);
+
+    printf("Emprunt du livre avec ISBN : 1234\n");
+    chariot_apporter_livre(1234, pbiblio, tete);
+
+    printf("Emprunt du livre avec ISBN : 111\n");
+    chariot_apporter_livre(111, pbiblio, tete);
+
+    printf("Emprunt du livre avec ISBN : 1001\n");
+    chariot_apporter_livre(1001, pbiblio, tete);
+
+
+    printf("Voici les livres dispobible sur le chariot\n");
+    afficher_livres_chariot(pbiblio, tete);
+
+    printf("Generer le rapport final\n");
     generer_rapport(&pbiblio);
 }

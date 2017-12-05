@@ -1,4 +1,5 @@
 #include "t_biblio.h"
+#include "t_chaine.h"
 
 #ifndef _T_BIBLIO_MACHINE__
 #define _T_BIBLIO_MACHINE__
@@ -23,19 +24,19 @@ typedef struct {
 
 int afficher_menu_kiosque(t_etudiant * etudiant);
 
-void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, t_livre * chariot_livres, int * nb_livres_chariot);
+void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete);
 
-void etudiant_apporter_livre(t_bibliotheque * biblio, t_livre * chariot_livres, int * nb_livres_chariot);
+void etudiant_apporter_livre(t_bibliotheque * biblio, lien * tete);
 
 void etudiant_retour_livre(t_bibliotheque * biblio);
 
-void etudiant_chercher_livre(t_bibliotheque * biblio, t_livre chariot_livres[], int nb_livres_chariot);
+void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete);
 
 void etudiant_dossier(t_etudiant * etudiant);
 
 void etudiant_random_test(t_etudiant * etudiant);
 
-void afficher_livres_chariot(t_bibliotheque * biblio, t_livre chariot_livres[], int nb_livres_chariot);
+void afficher_livres_chariot(t_bibliotheque * biblio, lien * tete);
 
 int afficher_menu_recherche();
 

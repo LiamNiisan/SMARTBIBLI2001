@@ -1,5 +1,6 @@
 #include "t_biblio_machine.h"
 #include "t_biblio_chariot.h"
+#include "t_chaine.h"
 
 
 void etudiant_random_test(t_etudiant * etudiant){
@@ -27,7 +28,7 @@ void etudiant_random_test(t_etudiant * etudiant){
 }
 
 
-void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, t_livre * chariot_livres, int * nb_livres_chariot)
+void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete)
 {
     int etudiant_id=0;
 
@@ -56,8 +57,8 @@ void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, t_livre * ch
 		switch (choix_menu)
 		{
             case 2: etudiant_retour_livre(bibli);break;
-            case 1: etudiant_chercher_livre(bibli, &chariot_livres, &nb_livres_chariot);break;
-            case 3: etudiant_apporter_livre(bibli, chariot_livres, nb_livres_chariot);break;
+            case 1: etudiant_chercher_livre(bibli, tete);break;
+            case 3: etudiant_apporter_livre(bibli, tete);break;
             case 4: etudiant_dossier(etudiant);break;
             case 0: break; // Quitter.
             default: exit(0); break;
@@ -94,13 +95,14 @@ int afficher_menu_kiosque(t_etudiant * etudiant)
 }
 
 
-void etudiant_apporter_livre(t_bibliotheque * biblio, t_livre * chariot_livres, int * nb_livres_chariot){
+void etudiant_apporter_livre(t_bibliotheque * biblio, lien * tete)
+{
 
     int isbn = 0;
     printf("Entrez le ISBN du livre que vous voulez emprunter : ");
     scanf("%d",&isbn);
 
-    chariot_apporter_livre(isbn, biblio, chariot_livres, nb_livres_chariot);
+    chariot_apporter_livre(isbn, biblio, tete);
     printf("To be continued...");
 
 }
@@ -112,8 +114,8 @@ void etudiant_retour_livre(t_bibliotheque * biblio){
 
 }
 
-void etudiant_chercher_livre(t_bibliotheque * biblio, t_livre chariot_livres[], int nb_livres_chariot){
-
+void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete)
+{
     int choix_menu =0;
 
 	do
@@ -123,7 +125,7 @@ void etudiant_chercher_livre(t_bibliotheque * biblio, t_livre chariot_livres[], 
 
 		switch (choix_menu)
 		{
-            case 1: afficher_livres_chariot(biblio, chariot_livres, nb_livres_chariot);break;
+            case 1: afficher_livres_chariot(biblio, tete);break;
             case 2: printf("To be continued");break;
             case 0: break; // Quitter.
             default: exit(0); break;
@@ -166,9 +168,9 @@ int afficher_menu_recherche()
 }
 
 
-void afficher_livres_chariot(t_bibliotheque * biblio, t_livre chariot_livres[], int nb_livres_chariot)
+void afficher_livres_chariot(t_bibliotheque * biblio, lien * tete)
 {
-    int i = 0;
+    /*int i = 0;
     for(i = 0; i < (nb_livres_chariot + 1); i++)
     {
         printf("-------------------------------\n");
@@ -179,7 +181,9 @@ void afficher_livres_chariot(t_bibliotheque * biblio, t_livre chariot_livres[], 
         printf("ISBN: %d \n", chariot_livres[i].isbn);
         printf("Emprunte: %d \n", chariot_livres[i].bEmprunte);
         printf("-------------------------------\n");
-    }
+    }*/
+
+    afficher(*tete);
 
     super_pause();
 }

@@ -1,4 +1,5 @@
 #include "t_biblio.h"
+#include "t_chaine.h"
 
 #ifndef _T_BIBLIO_CHARIOT__
 #define _T_BIBLIO_CHARIOT__
@@ -17,7 +18,7 @@ void chariot_retourner_livre(int ISBN, t_bibliotheque * pBibli);
 
 int chariot_get_pos();
 
-t_livre chariot_apporter_livre(int ISBN, t_bibliotheque * pBibli, t_livre * chariot_livres, int * compteur_nb_livre_chariot);
+t_livre chariot_apporter_livre(int ISBN, t_bibliotheque * pBibli, lien * tete);
 
 void chariot_get_vitesse(int vitesse);
 
