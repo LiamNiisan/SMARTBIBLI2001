@@ -51,7 +51,7 @@ void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, t_livre * ch
 	do
 	{
 	    // Gestion du menu.
-		choix_menu = afficher_menu_kiosque();
+		choix_menu = afficher_menu_kiosque(etudiant);
 
 		switch (choix_menu)
 		{
@@ -67,7 +67,7 @@ void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, t_livre * ch
 }
 
 
-int afficher_menu_kiosque()
+int afficher_menu_kiosque(t_etudiant * etudiant)
 {
     system("cls");//efface l'ecran
 
@@ -78,7 +78,7 @@ int afficher_menu_kiosque()
 	printf("                                Kiosque Biblio Virtuel\n");
 	printf("================================================================================\n");
 
-    printf("\n\nBonjour Etudiant No.%d - Comment puis-je vous aider aujourd'hui ?\n\n\n");
+    printf("\n\nBonjour Etudiant No.%d - Comment puis-je vous aider aujourd'hui ?\n\n\n",etudiant->no_etudiant);
 	printf("1. Chercher livre\n");
 	printf("2. Retourner livre\n");
 	printf("3. Apporter livre\n");
@@ -183,5 +183,4 @@ void afficher_livres_chariot(t_bibliotheque * biblio, t_livre chariot_livres[], 
 
     super_pause();
 }
-
 
