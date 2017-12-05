@@ -21,7 +21,7 @@ typedef struct {
 
 
 
-int afficher_menu_kiosque();
+int afficher_menu_kiosque(t_etudiant * etudiant);
 
 void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, t_livre * chariot_livres, int * nb_livres_chariot);
 
