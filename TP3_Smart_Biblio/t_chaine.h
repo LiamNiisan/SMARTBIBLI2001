@@ -23,7 +23,7 @@ struct noeud {
    void creer            (lien *);
    void afficher         (lien);
    void insere           (lien *, objet);
-   void insere_au_debut  (lien *, objet);
+   int insere_au_debut   (lien *, objet);
    void insere_a_la_fin  (lien *, objet);
    void retire           (lien *, objet);
    void retire_du_debut  (lien *);

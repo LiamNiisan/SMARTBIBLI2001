@@ -28,7 +28,7 @@ void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete)
 
 void etudiant_apporter_livre(t_bibliotheque * biblio, lien * tete);
 
-void etudiant_retour_livre(t_bibliotheque * biblio);
+void etudiant_retour_livre(t_bibliotheque * biblio, lien * tete);
 
 void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete);
 

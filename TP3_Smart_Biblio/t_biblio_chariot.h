@@ -8,21 +8,21 @@
 #define POS_DEPLACEMENT 1
 
 
-int chariot_ajouter_livre(t_livre livre);
+int chariot_ajouter_livre(lien * tete, t_livre livre);
 
-void chariot_retirer_livre(int ISBN, t_bibliotheque * pBibli);
+t_livre chariot_retirer_livre(lien * tete, int ISBN, t_bibliotheque * pBibli);
 
 void chariot_emprunter_livre(int ISBN, t_bibliotheque * pBibli);
 
-void chariot_retourner_livre(int ISBN, t_bibliotheque * pBibli);
+void chariot_retourner_livres(lien * tete, t_bibliotheque * pBibli);
 
 int chariot_get_pos();
 
 t_livre chariot_apporter_livre(int ISBN, t_bibliotheque * pBibli, lien * tete);
 
-void chariot_get_vitesse(int vitesse);
+void chariot_set_vitesse(int vitesse);
 
-int chariot_set_vitesse();
+int chariot_get_vitesse();
 
 #endif
 

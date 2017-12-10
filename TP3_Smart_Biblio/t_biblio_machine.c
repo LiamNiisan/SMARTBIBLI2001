@@ -56,7 +56,7 @@ void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete)
 
 		switch (choix_menu)
 		{
-            case 2: etudiant_retour_livre(bibli);break;
+            case 2: etudiant_retour_livre(bibli, tete);break;
             case 1: etudiant_chercher_livre(bibli, tete);break;
             case 3: etudiant_apporter_livre(bibli, tete);break;
             case 4: etudiant_dossier(etudiant);break;
@@ -99,19 +99,15 @@ void etudiant_apporter_livre(t_bibliotheque * biblio, lien * tete)
 {
 
     int isbn = 0;
-    printf("Entrez le ISBN du livre que vous voulez emprunter : ");
+    printf("Entrez le ISBN du livre que vous voulez apporter : ");
     scanf("%d",&isbn);
 
     chariot_apporter_livre(isbn, biblio, tete);
-    printf("To be continued...");
-
 }
 
-void etudiant_retour_livre(t_bibliotheque * biblio){
-
-    printf("To be continued...");
-    super_pause();
-
+void etudiant_retour_livre(t_bibliotheque * biblio, lien * tete)
+{
+    chariot_retourner_livres(tete, biblio);
 }
 
 void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete)

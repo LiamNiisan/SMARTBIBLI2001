@@ -802,8 +802,6 @@ int chercher_livre(int isbn, t_bibliotheque * pBibli, t_livre * temp_livre)
 {
     int i = 0;
     int j = 0;
-    t_livre livre_null;
-    livre_null.titre[5] = "ERROR";
 
     if(verifier_disp_bibliotheque(pBibli))
     {
@@ -826,14 +824,12 @@ int chercher_livre(int isbn, t_bibliotheque * pBibli, t_livre * temp_livre)
             }
         }
 
-        printf("Livre introuvable...");
-        super_pause();
+        printf("BIBLIO: Livre introuvable...\n");
         return NULL;
     }
     else
     {
-        printf("Pour retirer un livre, vous devez lire le fichier de bibliotheque %s \n",FICHIERBIBLIO);
-        super_pause();
+        printf("BIBLIO: Pour retirer un livre, vous devez lire le fichier de bibliotheque %s \n",FICHIERBIBLIO);
         return NULL;
     }
 }
@@ -846,18 +842,16 @@ int chercher_livre(int isbn, t_bibliotheque * pBibli, t_livre * temp_livre)
 // Fonction qui permet de gerer l'emprunt des livres
 //
 // Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Void.
+// Retour 		: Int.
 //*****************************************************************************/
-void emprunter_livre_isbn(int isbn, t_bibliotheque * pBibli)
+int emprunter_livre_isbn(int isbn, t_bibliotheque * pBibli)
 {
     int i=0; //variable d'incrementation
     int j=0; //variable d'incrementation
-    int resultat=100;
+    int resultat = LIVRE_INTROUVABLE;
 
-    if(verifier_disp_bibliotheque(pBibli)){
-
-        resultat = 0;
-
+    if(verifier_disp_bibliotheque(pBibli))
+    {
         //verifie chaque livre afin de voir si le ISBN de l'utilsateur existe
         for(i = 0; i < NB_GENRES; i++)
         {
@@ -868,46 +862,72 @@ void emprunter_livre_isbn(int isbn, t_bibliotheque * pBibli)
 
                     if(pBibli->livres[i][j].bEmprunte == 1)
                     {
-                            resultat = 2;
+                        resultat = LIVRE_NON_DISPONIBLE;
                     }
 
                     if(pBibli->livres[i][j].bEmprunte == 0)
                     {
                         pBibli->livres[i][j].bEmprunte = 1 ;
-                        resultat = 1;
+                        pBibli->rapport.nb_livres_emprunt++;
+                        pBibli->rapport.nb_livres_dispo--;
+                        resultat = LIVRE_EMPRUNTE;
                     }
 
                 }
             }
         }
 
-        //si le ISBN de l'utilisateur est disponible
-        if(resultat == 1 )
-        {
-            pBibli->rapport.nb_livres_emprunt++;
-            pBibli->rapport.nb_livres_dispo--;
-
-            printf("le livre de ISBN %d est maintenant emprunter!...\n",isbn);
-
-        }
-        //si le ISBN de l'utilisateur est deja emprunter
-        if(resultat == 2)
-        {
-            printf("Le livre de ISBN %d est deja emprunter ... \n",isbn);
-        }
-
-        //si le ISBN de l'utilisateur est pas trouvable
-        if(resultat == 0)
-        {
-            printf("le livre de ISBN %d est introuvable dans le fichier %s ...\n",isbn,FICHIERBIBLIO);
-        }
     }
     //ce message est si le fichier biblio.txt n'a pas ete lu
     else
     {
-        printf("Pour emprunter un livre, vous devez ouvrir le fichier bibliotheque %s...\n",FICHIERBIBLIO);
+        printf("BIBLIO: Pour emprunter un livre, vous devez ouvrir le fichier bibliotheque %s...\n",FICHIERBIBLIO);
     }
 
-	super_pause();
+	return resultat;
 }
+
+
+/******************************************************************************
+//retourner_livre
+// ****************************************************************************
+//
+// Fonction qui permet de gerer l'emprunt des livres
+//
+// Paramètres 	: t_bibliotheque * pBibli.
+// Retour 		: Int.
+//*****************************************************************************/
+int retourner_livre_isbn(int isbn, t_bibliotheque * pBibli)
+{
+    int i=0; //variable d'incrementation
+    int j=0; //variable d'incrementation
+    int resultat = LIVRE_INTROUVABLE;
+
+    if(verifier_disp_bibliotheque(pBibli))
+    {
+        //verifie chaque livre afin de voir si le ISBN de l'utilsateur existe
+        for(i = 0; i < NB_GENRES; i++)
+        {
+            for(j = 0; j < pBibli->nb_livres[i]; j++)
+            {
+                if(pBibli->livres[i][j].isbn == isbn)
+                {
+                        pBibli->livres[i][j].bEmprunte = 0 ;
+                        pBibli->rapport.nb_livres_emprunt--;
+                        pBibli->rapport.nb_livres_dispo++;
+                        resultat = LIVRE_REMIS;
+                }
+            }
+        }
+
+    }
+    //ce message est si le fichier biblio.txt n'a pas ete lu
+    else
+    {
+        printf("BIBLIO: Pour remttre un livre, vous devez ouvrir le fichier bibliotheque %s...\n",FICHIERBIBLIO);
+    }
+
+	return resultat;
+}
+
 

@@ -28,19 +28,7 @@
 void creer(lien *tete)
 {
     lien p;
-   //int  i;
-
-   /**tete = NULL;
-   //for (i=1; i<=5; i++) {
-    p = (lien) malloc(sizeof(struct noeud));
-    if (p == NULL)  { *tete = NULL;  return; }   //valider l'allocation dynamique
-
-    //p->data.isbn    = NULL ;
-    p->suivant = *tete;   //on attache le nouveau noeud DEVANT la tete
-    *tete       = p;
-   //}*/
-
-   p = NULL;
+    p = NULL;
 }
 
 /********************************************************************/
@@ -68,7 +56,6 @@ void afficher(lien tete)
        printf("Genre: %d \n",     p->data.genre);
        printf("Pages: %d \n",     p->data.nb_pages);
        printf("ISBN: %d \n",      p->data.isbn);
-       printf("Emprunte: %d \n",  p->data.bEmprunte);
        printf("-------------------------------\n");
 	   p = p->suivant;
    }
@@ -78,15 +65,17 @@ void afficher(lien tete)
 /********************************************************************/
 //Fonction qui crée un nouveau noeud avec la valeur "x" et qui va
 //placer ce noeud DEVANT la tete de liste reçue en paramètre
-void insere_au_debut(lien *tete, objet x)
+int insere_au_debut(lien *tete, objet x)
 { lien p;
 
   p = (lien) malloc(sizeof(struct noeud));
-  if (p == NULL)  return;   //valider l'allocation dynamique
+  if (p == NULL)  return NULL;   //valider l'allocation dynamique
 
   p->data    = x;
   p->suivant = *tete;
   *tete      = p;
+
+  return 1;
 }
 
 /********************************************************************/
@@ -165,7 +154,7 @@ void retire(lien *tete, objet n)
     }
 
     if (ici == NULL)
-       printf("\nIl n'y a pas d'item numero %d !!!\n\n", n);
+       printf("\nERREUR:Il n'y a pas de livre avec le ISBN : %d !!!\n\n", n.isbn);
     else {
 	   //Rétablir les liens avant de détruire ce noeud..
        if (ici == *tete) *tete = ici->suivant;

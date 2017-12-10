@@ -18,6 +18,11 @@
 #define EMPRUNT         1
 #define DISPONIBLE      0
 
+#define LIVRE_INTROUVABLE         0
+#define LIVRE_NON_DISPONIBLE      1
+#define LIVRE_EMPRUNTE            2
+#define LIVRE_REMIS               1
+
 typedef enum { AUCUN = 0, FICTION = 1, HISTOIRE = 2, SCIENCE = 3, ENFANTS = 4, INFORMATIQUE = 5 } t_genre;
 
 typedef struct
@@ -230,7 +235,7 @@ int verifier_disp_bibliotheque(t_bibliotheque * pBibli);
 
 int chercher_livre(int isbn, t_bibliotheque * pBibli, t_livre * temp_livre);
 
-void emprunter_livre_isbn(int isbn, t_bibliotheque * pBibli);
+int emprunter_livre_isbn(int isbn, t_bibliotheque * pBibli);
 
 
 #endif
