@@ -14,12 +14,15 @@
 
 int main()
 {
+
     t_etudiant etudiant;
     //t_bibliotheque biblio;
 
     t_bibliotheque bibli; //fichier principale de bibliotheque
 
     t_livre * chariot_livres;
+
+    t_pile * pile_robot;
 
     int compteur_nb_noeudlivre_chariot = 0;
 
