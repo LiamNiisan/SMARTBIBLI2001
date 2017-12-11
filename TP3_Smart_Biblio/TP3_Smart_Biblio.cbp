@@ -50,6 +50,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="t_biblio_robot.h" />
+		<Unit filename="t_chaine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="t_chaine.h" />
 		<Unit filename="t_pile.c">
 			<Option compilerVar="CC" />
 		</Unit>

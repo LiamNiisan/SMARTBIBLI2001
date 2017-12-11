@@ -3,7 +3,9 @@
 #include "t_chaine.h"
 
 
+
 void etudiant_random_test(t_etudiant * etudiant){
+
 
     srand((unsigned)time(0));
 
@@ -24,6 +26,8 @@ void etudiant_random_test(t_etudiant * etudiant){
 
          printf("Date d'inscription : %d\n",etudiant->date_etude);
          printf("Numero permanent de l'etudiant : %d\n",etudiant->no_etudiant);
+
+
 
 }
 
@@ -56,16 +60,18 @@ void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete)
 
 		switch (choix_menu)
 		{
-            case 2: etudiant_retour_livre(bibli, tete);break;
+            case 2: etudiant_retour_livre(bibli, tete, etudiant);break;
             case 1: etudiant_chercher_livre(bibli, tete);break;
-            case 3: etudiant_apporter_livre(bibli, tete);break;
+            case 3: etudiant_apporter_livre(bibli, tete, etudiant);break;
             case 4: etudiant_dossier(etudiant);break;
+            case 5: afficher_bibliotheque(bibli); break;
             case 0: break; // Quitter.
             default: exit(0); break;
 		}
 	} while (choix_menu != 0);
 
 }
+
 
 
 int afficher_menu_kiosque(t_etudiant * etudiant)
@@ -82,8 +88,9 @@ int afficher_menu_kiosque(t_etudiant * etudiant)
     printf("\n\nBonjour Etudiant No.%d - Comment puis-je vous aider aujourd'hui ?\n\n\n",etudiant->no_etudiant);
 	printf("1. Chercher livre\n");
 	printf("2. Retourner livre\n");
-	printf("3. Apporter livre\n");
+	printf("3. Demande de livre au chariot\n");
 	printf("4. Voir Dossier de l'Etudiant\n");
+	printf("5. Voir les livres disponibles a la bibliotheque\n");
 	printf("0. Quitter\n\n");
 
 	printf("================================================================================\n");
@@ -91,23 +98,64 @@ int afficher_menu_kiosque(t_etudiant * etudiant)
 	do{
         scanf("%d",&choix_user);
 
-    }while(choix_user < 0 || choix_user > 4); //limite du choix de l'utilisateur
+    }while(choix_user < 0 || choix_user > 5); //limite du choix de l'utilisateur
 }
 
 
-void etudiant_apporter_livre(t_bibliotheque * biblio, lien * tete)
+void etudiant_apporter_livre(t_bibliotheque * biblio, lien * tete, t_etudiant * etudiant)
 {
+    int  i = 0;
+    int j = 0;
 
-    int isbn = 0;
-    printf("Entrez le ISBN du livre que vous voulez apporter : ");
+    if(verifier_disp_bibliotheque(biblio)){
+        int isbn = 0;
+        printf("Entrez le ISBN du livre que vous voulez apporter : ");
+        scanf("%d",&isbn);
+        chariot_apporter_livre(isbn, biblio, tete);
+   }
+   else{
+
+        printf("Veuillez actualiser votre fichier biblio avant de pouvoir louer un livre...\n");
+        printf("1- Bibliotheque... 2- Lire le fichier bibliotheque\n");
+        super_pause();
+   }
+}
+
+void etudiant_retour_livre(t_bibliotheque * biblio, lien * tete, t_etudiant * etudiant)
+{
+    int i=0;
+    int j=0;
+    int isbn=0;
+    //chariot_retourner_livres(tete, biblio);
+
+ //if(etudiant->livre_empreunter!=0){
+    printf("Entrez le ISBN du livre que vous voulez retourner : ");
     scanf("%d",&isbn);
 
-    chariot_apporter_livre(isbn, biblio, tete);
-}
 
-void etudiant_retour_livre(t_bibliotheque * biblio, lien * tete)
-{
-    chariot_retourner_livres(tete, biblio);
+
+     for(i = 0; i < NB_GENRES; i++)
+        {
+            for(j = 0; j < biblio->nb_livres[i]; j++)
+            {
+                if(biblio->livres[i][j].isbn == isbn)
+                {
+                    etudiant->livre_empreunter++;
+                    robot_ajouter_livre(biblio->livres[i][j]);
+
+
+                }
+            }
+        }
+
+    //}
+   // else{
+
+        //printf("vous avez aucun livre empreunter a votre dossier...\n");
+
+    //}
+
+    //super_pause();
 }
 
 void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete)

@@ -47,6 +47,7 @@ typedef struct {
 	 //L'endroit de stockage des données
    t_element  tab_elements[MAX_PILE];
 
+
 	 //L'endroit où est la donnée à désempiler
    int      sommet;
 } t_pile;
@@ -62,7 +63,7 @@ int  est_pleine(const t_pile* p);
 int  est_vide(const t_pile* p);
 
 //Ajoute l'élément reçu sur le dessus de la pile(push)
-void empile(t_pile* p, t_element e);
+void empile(t_pile* p, t_livre e);
 
 //Retourne l'élément sur le dessus et le retire de la pile(pop)
 t_element desempile(t_pile* p);

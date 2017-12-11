@@ -34,7 +34,7 @@ int  est_vide(const t_pile *p)
 }
 
 //Ajoute l'élément reçu sur le dessus de la pile
-void empile(t_pile *p, t_element e)
+void empile(t_pile *p, t_livre e)
 {
 	//On utilise la pré incrémentation du C pour déplacer
 	//le sommet avant d'insérer dans le tableau

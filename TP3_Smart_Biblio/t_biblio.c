@@ -197,9 +197,9 @@ int demander_choix_menu(){
 	printf("2 - Lire Fichier Bibliotheque\n");
 	printf("3 - Modifier Livre\n");
 	printf("4 - Retirer Livre\n");
-	printf("5 - Emprunter Livre\n");
-	printf("6 - Retourner Livre (Lundi Matin)\n");
-	printf("7 - Generer Rapport\n");
+	//printf("5 - Emprunter Livre\n");
+	//printf("6 - Retourner Livre (Lundi Matin)\n");
+	//printf("7 - Generer Rapport\n");
 	printf("8 - Sauvegarder Bibliotheque\n");
 	printf("9 - Trier Livres (bonus)\n");
     printf("0 - Quitter");
