@@ -32,7 +32,6 @@ void afficher_menu_bibliotheque(t_bibliotheque * pBibli)
 		case 6: gerer_retours(pBibli); break;
 		case 7: generer_rapport(pBibli); break;
 		case 8: sauvegarder_fichier(pBibli); break;
-		//case 9: trier_livres(&bibli); break;
 		case 0: break; // Quitter.
 		default: exit(0); break;
 		}
@@ -199,9 +198,9 @@ int demander_choix_menu(){
 	printf("4 - Retirer Livre\n");
 	//printf("5 - Emprunter Livre\n");
 	//printf("6 - Retourner Livre (Lundi Matin)\n");
-	//printf("7 - Generer Rapport\n");
-	printf("8 - Sauvegarder Bibliotheque\n");
-	printf("9 - Trier Livres (bonus)\n");
+	printf("5 - Generer Rapport\n");
+	printf("6 - Sauvegarder Bibliotheque\n");
+	//printf("9 - Trier Livres (bonus)\n");
     printf("0 - Quitter");
     printf("\n\n");
 
@@ -928,6 +927,76 @@ int retourner_livre_isbn(int isbn, t_bibliotheque * pBibli)
     }
 
 	return resultat;
+}
+
+
+void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_livre * resultat)
+{
+    char data[100];
+    int i = 0;
+    int j = 0;
+    int top;
+    t_livre dernier_element;
+
+    t_pile pile;
+    init_pile(&pile);
+
+    if(verifier_disp_bibliotheque(pBibli))
+    {
+        for(i = 0; i < NB_GENRES; i++)
+        {
+            for(j = 0; j < pBibli->nb_livres[i]; j++)
+            {
+                switch (option)
+                {
+                    case RECHERCHE_ISBN:
+                        itoa(pBibli->livres[i][j].isbn, data, 10);
+                    break;
+
+                    case RECHERCHE_GENRE:
+                        itoa((int)pBibli->livres[i][j].genre, data, 10);
+                    break;
+
+                    case RECHERCHE_AUTEUR:
+                        strcpy(data, (pBibli->livres[i][j].auteur_prenom)); //+ " " + pBibli->livres[i][j].auteur_prenom));
+                    break;
+
+                    case RECHERCHE_TITRE:
+                        strcpy(data, pBibli->livres[i][j].titre);
+                    break;
+                }
+
+                if(strstr(param, data) != NULL)
+                {
+                    empile(&pile, pBibli->livres[i][j]);
+                }
+            }
+        }
+
+        int top = pile.sommet;
+
+        resultat = (t_livre *)malloc(top * sizeof(t_livre));
+
+        for(i = 0; i < top; i++)
+        {
+            dernier_element = desempile(&pile);
+            resultat[i] = dernier_element;
+            printf("----------------- \n");
+            printf("Titre: %s \n", dernier_element.titre);
+            printf("Auteur: %s %s \n", dernier_element.auteur_prenom, dernier_element.auteur_nom);
+            printf("Genre: %d \n", dernier_element.genre);
+            printf("Pages: %d \n", dernier_element.nb_pages);
+            printf("ISBN: %d \n", dernier_element.isbn);
+            printf("Emprunte: %d \n", dernier_element.bEmprunte);
+            printf("-----------------\n");
+        }
+        super_pause();
+
+    }
+    else
+    {
+        printf("BIBLIO: Pour retirer un livre, vous devez lire le fichier de bibliotheque %s \n",FICHIERBIBLIO);
+    }
 }
 
 

@@ -5,7 +5,7 @@
 void robot_ajouter_livre(t_livre livre){
 
 
-        printf("Vous avez retourner au robot le livre de ISBN : %d\n",livre.isbn);
+        printf("Vous avez retourne au robot le livre de ISBN : %d\n",livre.isbn);
 
         //empile(pile, livre);
 

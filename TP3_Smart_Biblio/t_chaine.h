@@ -20,17 +20,17 @@ struct noeud {
 };
 
 /*********  Déclarations des fonctions de gestion de liste  *********/
-   void creer            (lien *);
-   void afficher         (lien);
-   void insere           (lien *, objet);
-   int insere_au_debut   (lien *, objet);
-   void insere_a_la_fin  (lien *, objet);
-   void retire           (lien *, objet);
-   void retire_du_debut  (lien *);
-   void retire_de_la_fin (lien *);
-   void trier(lien);
+void creer            (lien *);
+void afficher         (lien);
+void insere           (lien *, objet);
+int insere_au_debut   (lien *, objet);
+void insere_a_la_fin  (lien *, objet);
+void retire           (lien *, objet);
+void retire_du_debut  (lien *);
+void retire_de_la_fin (lien *);
+void trier(lien);
 
 
 
-   #endif
+#endif
 

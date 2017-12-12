@@ -14,8 +14,6 @@
 
 int main()
 {
-
-
     t_etudiant etudiant;
     //t_bibliotheque biblio;
 
@@ -30,27 +28,11 @@ int main()
     lien  tete;
     creer(&tete);
 
-    /*t_livre test;
-
-    strcpy(test.auteur_nom, "YO");
-    strcpy(test.auteur_prenom, "LO");
-    strcpy(test.titre, "BOOM");
-    test.isbn = 666;*/
-
-    /*insere_au_debut(&tete, test);
-    afficher(tete);  getch()*/;
-
-    //menu fonctionelle avec generation d'un user random
-    //etudiant_servir(&etudiant,&biblio);
-    //remise_partielle(&biblio);
-
     // Initialisation de la bibliotheque
 	initialiser_bibliotheque(&bibli);
 
     //initialisation du rapport
     initialiser_rapport(&bibli);
-
-
 
     int choix_menu = 0;
 

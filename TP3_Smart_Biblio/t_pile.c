@@ -53,8 +53,6 @@ t_element getSansEnlever(t_pile* p)
 int get_nb_elements(const t_pile* p)
 {
 	//Le sommet pointe sur l'indice de l'élément qui#define NB_LIVRES_MAX_RANGEE        100
-#define NB_GENRES                   6
-#define BIBLIO_FICHIER				"biblio.txt"
 	//se trouve 1 de moins que le nombre d'éléments
 	return p->sommet + 1;
 }

@@ -4,31 +4,27 @@
 
 
 
-void etudiant_random_test(t_etudiant * etudiant){
-
-
+void etudiant_random_test(t_etudiant * etudiant)
+{
     srand((unsigned)time(0));
 
-        int date=0;
-        int id_etudiant=0;
+    int date=0;
+    int id_etudiant=0;
 
-        date = rand() %(DATE_MAX - DATE_MIN);
-        date+=2000;
-        etudiant->date_etude = date;
-
-
-
-        id_etudiant = rand() % (ID_MAX - ID_MIN);
-        etudiant->no_etudiant = id_etudiant;
-
-        etudiant->livre_empreunter = 0;
-
-
-         printf("Date d'inscription : %d\n",etudiant->date_etude);
-         printf("Numero permanent de l'etudiant : %d\n",etudiant->no_etudiant);
+    date = rand() %(DATE_MAX - DATE_MIN);
+    date+=2000;
+    etudiant->date_etude = date;
 
 
 
+    id_etudiant = rand() % (ID_MAX - ID_MIN);
+    etudiant->no_etudiant = id_etudiant;
+
+    etudiant->livre_empreunter = 0;
+
+
+    printf("Date d'inscription : %d\n",etudiant->date_etude);
+    printf("Numero permanent de l'etudiant : %d\n",etudiant->no_etudiant);
 }
 
 
@@ -60,11 +56,10 @@ void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete)
 
 		switch (choix_menu)
 		{
-            case 2: etudiant_retour_livre(bibli, tete, etudiant);break;
+            case 2: etudiant_retour_livre(bibli, tete);break;
             case 1: etudiant_chercher_livre(bibli, tete);break;
             case 3: etudiant_apporter_livre(bibli, tete, etudiant);break;
             case 4: etudiant_dossier(etudiant);break;
-            case 5: afficher_bibliotheque(bibli); break;
             case 0: break; // Quitter.
             default: exit(0); break;
 		}
@@ -88,9 +83,8 @@ int afficher_menu_kiosque(t_etudiant * etudiant)
     printf("\n\nBonjour Etudiant No.%d - Comment puis-je vous aider aujourd'hui ?\n\n\n",etudiant->no_etudiant);
 	printf("1. Chercher livre\n");
 	printf("2. Retourner livre\n");
-	printf("3. Demande de livre au chariot\n");
+	printf("3. Apporter livre\n");
 	printf("4. Voir Dossier de l'Etudiant\n");
-	printf("5. Voir les livres disponibles a la bibliotheque\n");
 	printf("0. Quitter\n\n");
 
 	printf("================================================================================\n");
@@ -104,58 +98,15 @@ int afficher_menu_kiosque(t_etudiant * etudiant)
 
 void etudiant_apporter_livre(t_bibliotheque * biblio, lien * tete, t_etudiant * etudiant)
 {
-    int  i = 0;
-    int j = 0;
-
-    if(verifier_disp_bibliotheque(biblio)){
-        int isbn = 0;
-        printf("Entrez le ISBN du livre que vous voulez apporter : ");
-        scanf("%d",&isbn);
-        chariot_apporter_livre(isbn, biblio, tete);
-   }
-   else{
-
-        printf("Veuillez actualiser votre fichier biblio avant de pouvoir louer un livre...\n");
-        printf("1- Bibliotheque... 2- Lire le fichier bibliotheque\n");
-        super_pause();
-   }
+    int isbn = 0;
+    printf("Entrez le ISBN du livre que vous voulez apporter : ");
+    scanf("%d",&isbn);
+    chariot_apporter_livre(isbn, biblio, tete);
 }
 
-void etudiant_retour_livre(t_bibliotheque * biblio, lien * tete, t_etudiant * etudiant)
+void etudiant_retour_livre(t_bibliotheque * biblio, lien * tete)
 {
-    int i=0;
-    int j=0;
-    int isbn=0;
-    //chariot_retourner_livres(tete, biblio);
-
- //if(etudiant->livre_empreunter!=0){
-    printf("Entrez le ISBN du livre que vous voulez retourner : ");
-    scanf("%d",&isbn);
-
-
-
-     for(i = 0; i < NB_GENRES; i++)
-        {
-            for(j = 0; j < biblio->nb_livres[i]; j++)
-            {
-                if(biblio->livres[i][j].isbn == isbn)
-                {
-                    etudiant->livre_empreunter++;
-                    robot_ajouter_livre(biblio->livres[i][j]);
-
-
-                }
-            }
-        }
-
-    //}
-   // else{
-
-        //printf("vous avez aucun livre empreunter a votre dossier...\n");
-
-    //}
-
-    //super_pause();
+    chariot_retourner_livres(tete, biblio);
 }
 
 void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete)
@@ -170,7 +121,7 @@ void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete)
 		switch (choix_menu)
 		{
             case 1: afficher_livres_chariot(biblio, tete);break;
-            case 2: printf("To be continued");break;
+            case 2: rechercher_livre(biblio);break;
             case 0: break; // Quitter.
             default: exit(0); break;
 		}
@@ -214,21 +165,90 @@ int afficher_menu_recherche()
 
 void afficher_livres_chariot(t_bibliotheque * biblio, lien * tete)
 {
-    /*int i = 0;
-    for(i = 0; i < (nb_livres_chariot + 1); i++)
-    {
-        printf("-------------------------------\n");
-        printf("Titre: %s \n", chariot_livres[i].titre);
-        printf("Auteur: %s %s \n", chariot_livres[i].auteur_prenom, chariot_livres[i].auteur_nom);
-        printf("Genre: %d \n", chariot_livres[i].genre);
-        printf("Pages: %d \n", chariot_livres[i].nb_pages);
-        printf("ISBN: %d \n", chariot_livres[i].isbn);
-        printf("Emprunte: %d \n", chariot_livres[i].bEmprunte);
-        printf("-------------------------------\n");
-    }*/
-
     afficher(*tete);
 
     super_pause();
+}
+
+
+void rechercher_livre(t_bibliotheque * biblio)
+{
+    int choix_menu =0;
+
+	do
+	{
+	    // Gestion du menu.
+		choix_menu = afficher_menu_moteur_recherche();
+
+		switch (choix_menu)
+		{
+            case 1: moteur_recherche(biblio, RECHERCHE_ISBN);break;
+            case 2: moteur_recherche(biblio, RECHERCHE_GENRE);break;
+            case 3: moteur_recherche(biblio, RECHERCHE_AUTEUR);break;
+            case 4: moteur_recherche(biblio, RECHERCHE_TITRE);break;
+            case 0: break; // Quitter.
+            default: exit(0); break;
+		}
+	} while (choix_menu != 0);
+}
+
+
+
+int afficher_menu_moteur_recherche()
+{
+    system("cls");//efface l'ecran
+
+    int choix_user=0; //variable pour le choix
+
+
+    printf("================================================================================\n");
+	printf("                                Kiosque Biblio Virtuel\n");
+	printf("================================================================================\n");
+
+    printf("\n\n---------Moteur de recherche---------\n\n");
+	printf("1. Chercher par ISBN\n");
+	printf("2. Chercher par genre\n");
+	printf("3. Chercher par auteur\n");
+	printf("4. Chercher par titre\n");
+	printf("0. Quitter\n\n");
+
+	printf("================================================================================\n");
+
+	do{
+        scanf("%d",&choix_user);
+
+    }while(choix_user < 0 || choix_user > 4); //limite du choix de l'utilisateur
+}
+
+
+
+void moteur_recherche(t_bibliotheque * biblio, int option)
+{
+    char * genres[PARAMETRES_RECHERCHE] = {"ISBN", "auteur", "titre", "genre"};
+    char parametre[100];
+    t_livre * resultat;
+
+    printf("Veuillez specifier quel %s vous desire chercher\n", genres[option]);
+
+    switch (option)
+	{
+        case RECHERCHE_ISBN || RECHERCHE_AUTEUR || RECHERCHE_TITRE:
+            scanf("%s", parametre);
+        break;
+
+        case RECHERCHE_GENRE:
+            printf("0 - AUCUN\n");
+            printf("1 - FICTION\n");
+            printf("2 - HISTOIRE\n");
+            printf("3 - SCIENCE\n");
+            printf("4 - ENFANTS\n");
+            printf("5 - INFORMATIQUE\n");
+            scanf("%s", parametre);
+
+        break;
+	}
+
+	chercher_livre_moteur(parametre, biblio, option, resultat);
+	super_pause();
 }
 

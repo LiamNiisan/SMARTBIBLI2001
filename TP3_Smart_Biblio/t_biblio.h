@@ -23,6 +23,14 @@
 #define LIVRE_EMPRUNTE            2
 #define LIVRE_REMIS               1
 
+
+#define RECHERCHE_ISBN    0
+#define RECHERCHE_AUTEUR  1
+#define RECHERCHE_TITRE   2
+#define RECHERCHE_GENRE   3
+
+#define PARAMETRES_RECHERCHE 4
+
 typedef enum { AUCUN = 0, FICTION = 1, HISTOIRE = 2, SCIENCE = 3, ENFANTS = 4, INFORMATIQUE = 5 } t_genre;
 
 typedef struct
@@ -236,6 +244,8 @@ int verifier_disp_bibliotheque(t_bibliotheque * pBibli);
 int chercher_livre(int isbn, t_bibliotheque * pBibli, t_livre * temp_livre);
 
 int emprunter_livre_isbn(int isbn, t_bibliotheque * pBibli);
+
+void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_livre * resultat);
 
 
 #endif

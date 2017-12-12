@@ -28,7 +28,7 @@ void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete)
 
 void etudiant_apporter_livre(t_bibliotheque * biblio, lien * tete, t_etudiant * etudiant);
 
-void etudiant_retour_livre(t_bibliotheque * biblio, lien * tete, t_etudiant * etudiant);
+void etudiant_retour_livre(t_bibliotheque * biblio, lien * tete);
 
 void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete);
 
@@ -39,5 +39,13 @@ void etudiant_random_test(t_etudiant * etudiant);
 void afficher_livres_chariot(t_bibliotheque * biblio, lien * tete);
 
 int afficher_menu_recherche();
+
+void rechercher_livre(t_bibliotheque * biblio);
+
+int afficher_menu_moteur_recherche();
+
+void moteur_recherche(t_bibliotheque * biblio, int option);
+
+
 
 #endif
