@@ -2,15 +2,18 @@
 
 
 
-void robot_ajouter_livre(t_livre livre, t_pile_robot * pile){
+void robot_ajouter_livre(t_livre livre){
 
 
-    printf("Vous avez retourner au robot le livre de ISBN : %d\n",livre.isbn);
+        printf("Vous avez retourner au robot le livre de ISBN : %d\n",livre.isbn);
 
-    //empile(pile, livre);
+        //empile(pile, livre);
+
+        t_livre * nouveaulivre = (t_livre*)malloc(sizeof(t_livre));
 
 
-    super_pause();
+
+        super_pause();
 
 
 

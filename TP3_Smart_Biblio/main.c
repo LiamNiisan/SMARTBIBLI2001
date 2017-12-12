@@ -15,6 +15,7 @@
 int main()
 {
 
+
     t_etudiant etudiant;
     //t_bibliotheque biblio;
 
