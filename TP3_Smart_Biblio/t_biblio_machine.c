@@ -1,6 +1,10 @@
 #include "t_biblio_machine.h"
 #include "t_biblio_chariot.h"
 #include "t_chaine.h"
+#include "t_pile.h"
+
+
+
 
 
 
@@ -28,7 +32,7 @@ void etudiant_random_test(t_etudiant * etudiant)
 }
 
 
-void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete)
+void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete, t_pile * pile_robot)
 {
     int etudiant_id=0;
 
@@ -56,7 +60,7 @@ void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete)
 
 		switch (choix_menu)
 		{
-            case 2: etudiant_retour_livre(bibli, tete);break;
+            case 2: etudiant_retour_livre(bibli,pile_robot);break;
             case 1: etudiant_chercher_livre(bibli, tete);break;
             case 3: etudiant_apporter_livre(bibli, tete, etudiant);break;
             case 4: etudiant_dossier(etudiant);break;
@@ -99,14 +103,36 @@ int afficher_menu_kiosque(t_etudiant * etudiant)
 void etudiant_apporter_livre(t_bibliotheque * biblio, lien * tete, t_etudiant * etudiant)
 {
     int isbn = 0;
-    printf("Entrez le ISBN du livre que vous voulez apporter : ");
+    printf("Entrez le ISBN du livre que vous voulez que le chariot vous apporte : ");
     scanf("%d",&isbn);
     chariot_apporter_livre(isbn, biblio, tete);
 }
 
-void etudiant_retour_livre(t_bibliotheque * biblio, lien * tete)
+void etudiant_retour_livre(t_bibliotheque * biblio, t_pile* pile_robot)
 {
-    chariot_retourner_livres(tete, biblio);
+    t_livre livretemp;
+
+    int i = 0;
+    int j = 0;
+    int isbn = 0;
+
+    printf("Entrez le ISBN du livre que vous voulez retourner a la bibliotheque : ");
+    scanf("%d",&isbn);
+
+    chercher_livre(isbn,biblio,&livretemp);
+    printf("Vous retourner au kiosque : \n");
+    printf("%s\n",livretemp.titre);
+    printf("%s, ",livretemp.auteur_nom);
+    printf("%s\n",livretemp.auteur_prenom);
+    printf("Nombre de pages : %d\n",livretemp.nb_pages);
+    printf("ISBN : %d\n\n",livretemp.isbn);
+
+
+
+    empile(pile_robot,livretemp);
+
+    super_pause();
+
 }
 
 void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete)

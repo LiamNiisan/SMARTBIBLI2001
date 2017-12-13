@@ -21,6 +21,8 @@ int main()
 
     t_livre * chariot_livres;
 
+
+    //pile pour le robot
     t_pile * pile_robot;
 
     int compteur_nb_noeudlivre_chariot = 0;
@@ -44,7 +46,7 @@ int main()
 		switch (choix_menu)
 		{
             case 1: afficher_menu_bibliotheque(&bibli); break;
-            case 2: etudiant_servir(&etudiant,&bibli, &tete); break;
+            case 2: etudiant_servir(&etudiant,&bibli, &tete, &pile_robot); break;
             case 3: simulateur(&bibli, &tete); break;
             case 0: break; // Quitter.
             default: exit(0); break;
