@@ -10,7 +10,7 @@
 
 void robot_ajouter_livre(t_livre livre, t_pile * pile_robot);
 
-void robot_placer_livre_chariot();
+void robot_placer_livre_chariot(t_pile * pile_robot);
 
 
 

@@ -182,7 +182,7 @@
 1513095436 source:d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_chaine.c
 	"t_chaine.h"
 
-1513038373 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\main.c
+1513182725 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\main.c
 	<stdio.h>
 	<stdlib.h>
 	"t_biblio.h"
@@ -192,50 +192,54 @@
 	"t_pile.h"
 	"t_chaine.h"
 
-1512883925 c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio.h
+1513182725 c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio.h
 
-1512883925 c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio_chariot.h
+1513182725 c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio_chariot.h
 	"t_biblio.h"
 	"t_chaine.h"
 
-1512883925 c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_chaine.h
+1513182725 c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_chaine.h
 	<stdio.h>
 	<conio.h>
 	<stdlib.h>
 	"t_biblio.h"
 
-1513034424 c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio_machine.h
+1513182725 c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio_machine.h
 	"t_biblio.h"
 	"t_chaine.h"
+	"t_pile.h"
 
-1513038624 c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio_robot.h
+1513376476 c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio_robot.h
+	"t_biblio.h"
+	"t_pile.h"
+
+1513182725 c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_pile.h
 	"t_biblio.h"
 
-1513035825 c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_pile.h
-	"t_biblio.h"
-
-1513034546 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio.c
+1513182725 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio.c
 	"t_biblio.h"
 	"t_pile.h"
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
 
-1512883925 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio_chariot.c
+1513182725 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio_chariot.c
 	"t_biblio_chariot.h"
 
-1513035549 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio_machine.c
+1513182725 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio_machine.c
 	"t_biblio_machine.h"
 	"t_biblio_chariot.h"
 	"t_chaine.h"
-
-1513036340 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio_robot.c
-	"t_biblio_robot.h"
-
-1513035761 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_pile.c
 	"t_pile.h"
 
-1512883925 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_chaine.c
+1513182725 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_biblio_robot.c
+	"t_biblio_robot.h"
+	"t_pile.h"
+
+1513182725 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_pile.c
+	"t_pile.h"
+
+1513182725 source:c:\users\ti_mo\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_chaine.c
 	"t_chaine.h"
 
 1513175307 source:c:\users\moreau\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\main.c
