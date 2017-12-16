@@ -1,12 +1,8 @@
 // Exemple de gestion d'une liste chaînée simple ordonnée en ordre décroissant
+#include "lib.h"
 
-#ifndef _T_CHAINE__
-#define _T_CHAINE__
-
-#include <stdio.h>
-#include <conio.h>
-#include <stdlib.h>
-#include "t_biblio.h"
+#ifndef T_CHAINE_H_INCLUDED
+#define T_CHAINE_H_INCLUDED
 
 /********************************************************************/
 /*********  Déclarations des types pour la liste chaînée  *********/

@@ -1,10 +1,14 @@
-#ifndef _T_BIBLIO__
-#define _T_BIBLIO__
+#include "lib.h"
 
+#ifndef T_BIBLIO_H_INCLUDED
+#define T_BIBLIO_H_INCLUDED
 
 #define NB_LIVRES_MAX_RANGEE        100
 #define NB_GENRES                   6
 #define BIBLIO_FICHIER				"biblio.txt"
+
+#define FICHIERBIBLIO               "biblio.txt"
+
 
 #define TAILLE_TITRE	80
 #define TAILLE_NOM		30
@@ -31,7 +35,7 @@
 
 #define PARAMETRES_RECHERCHE 4
 
-typedef enum { AUCUN = 0, FICTION = 1, HISTOIRE = 2, SCIENCE = 3, ENFANTS = 4, INFORMATIQUE = 5 } t_genre;
+//typedef enum { AUCUN = 0, FICTION = 1, HISTOIRE = 2, SCIENCE = 3, ENFANTS = 4, INFORMATIQUE = 5 } t_genre;
 
 typedef struct
 {
@@ -41,7 +45,7 @@ typedef struct
 
 
 
-typedef struct
+/*typedef struct
 {
 	t_genre genre;
 	int nb_pages;
@@ -50,7 +54,7 @@ typedef struct
 	char titre[TAILLE_TITRE];
 	int isbn;
 	int bEmprunte; // 1: Le livre a ete emprunte, 0: le livre est disponible.
-} t_livre;
+} t_livre;*/
 
 
 
@@ -245,7 +249,7 @@ int chercher_livre(int isbn, t_bibliotheque * pBibli, t_livre * temp_livre);
 
 int emprunter_livre_isbn(int isbn, t_bibliotheque * pBibli);
 
-void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_livre * resultat);
+void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_pile * pile);
 
 
 #endif

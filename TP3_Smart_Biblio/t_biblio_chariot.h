@@ -1,8 +1,8 @@
-#include "t_biblio.h"
-#include "t_chaine.h"
+#include "lib.h"
 
-#ifndef _T_BIBLIO_CHARIOT__
-#define _T_BIBLIO_CHARIOT__
+
+#ifndef T_BIBLIO_CHARIOT_H_INCLUDED
+#define T_BIBLIO_CHARIOT_H_INCLUDED
 
 #define POS_KIOSK 0
 #define POS_DEPLACEMENT 1

@@ -12,11 +12,10 @@
 *
 */
 
-#include "t_biblio.h"
+#include "lib.h"
 
-
-#ifndef _T_PILE__
-#define _T_PILE__
+#ifndef T_PILE_H_INCLUDED
+#define T_PILE_H_INCLUDED
 
 #define  MAX_PILE  50
 #define  PILE_VIDE  -1
@@ -26,9 +25,9 @@
 #define TAILLE_PRENOM	30
 
 
-//typedef enum {AUCUN = 0, FICTION = 1, HISTOIRE = 2, SCIENCE = 3, ENFANTS = 4, INFORMATIQUE = 5} t_genre;
+typedef enum {AUCUN = 0, FICTION = 1, HISTOIRE = 2, SCIENCE = 3, ENFANTS = 4, INFORMATIQUE = 5} t_genre;
 
-/*typedef struct
+typedef struct
 {
     t_genre genre;
     int nb_pages;
@@ -37,7 +36,21 @@
     char titre[TAILLE_TITRE];
     int isbn;
     int bEmprunte; // 1: Le livre a ete emprunte, 0: le livre est disponible.
-} t_livre;*/
+} t_livre;
+
+/*typedef struct
+{
+	int nb_livres_dispo;
+	int nb_livres_emprunt;
+} t_rapport;
+
+typedef struct
+{
+	t_livre livres[NB_GENRES][NB_LIVRES_MAX_RANGEE];
+	int nb_livres[NB_GENRES];
+	//t_pile retours;
+	t_rapport rapport;
+} t_bibliotheque;*/
 
 //changer cette déclaration pour obtenir des piles d'un autre type
 typedef t_livre t_element;

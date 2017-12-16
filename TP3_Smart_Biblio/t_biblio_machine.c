@@ -1,7 +1,4 @@
 #include "t_biblio_machine.h"
-#include "t_biblio_chariot.h"
-#include "t_chaine.h"
-#include "t_pile.h"
 
 
 
@@ -147,7 +144,7 @@ void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete)
 		switch (choix_menu)
 		{
             case 1: afficher_livres_chariot(biblio, tete);break;
-            case 2: rechercher_livre(biblio);break;
+            case 2: rechercher_livre(biblio, tete);break;
             case 0: break; // Quitter.
             default: exit(0); break;
 		}
@@ -197,7 +194,7 @@ void afficher_livres_chariot(t_bibliotheque * biblio, lien * tete)
 }
 
 
-void rechercher_livre(t_bibliotheque * biblio)
+void rechercher_livre(t_bibliotheque * biblio, lien * tete)
 {
     int choix_menu =0;
 
@@ -208,10 +205,10 @@ void rechercher_livre(t_bibliotheque * biblio)
 
 		switch (choix_menu)
 		{
-            case 1: moteur_recherche(biblio, RECHERCHE_ISBN);break;
-            case 2: moteur_recherche(biblio, RECHERCHE_GENRE);break;
-            case 3: moteur_recherche(biblio, RECHERCHE_AUTEUR);break;
-            case 4: moteur_recherche(biblio, RECHERCHE_TITRE);break;
+            case 1: moteur_recherche(biblio, RECHERCHE_ISBN, tete);break;
+            case 2: moteur_recherche(biblio, RECHERCHE_GENRE, tete);break;
+            case 3: moteur_recherche(biblio, RECHERCHE_AUTEUR, tete);break;
+            case 4: moteur_recherche(biblio, RECHERCHE_TITRE, tete);break;
             case 0: break; // Quitter.
             default: exit(0); break;
 		}
@@ -248,18 +245,28 @@ int afficher_menu_moteur_recherche()
 
 
 
-void moteur_recherche(t_bibliotheque * biblio, int option)
+void moteur_recherche(t_bibliotheque * biblio, int option, lien * tete)
 {
     char * genres[PARAMETRES_RECHERCHE] = {"ISBN", "auteur", "titre", "genre"};
     char parametre[100];
+
+    int nb_livres;
+    int i;
+    int choix = 0;
+
     t_livre * resultat;
+    t_livre dernier_element;
+
+    t_pile pile;
 
     printf("Veuillez specifier quel %s vous desire chercher\n", genres[option]);
 
     switch (option)
 	{
-        case RECHERCHE_ISBN || RECHERCHE_AUTEUR || RECHERCHE_TITRE:
-            scanf("%s", parametre);
+        case RECHERCHE_AUTEUR:
+        case RECHERCHE_TITRE:
+        case RECHERCHE_ISBN:
+            scanf(" %[^\n]%*c", parametre);
         break;
 
         case RECHERCHE_GENRE:
@@ -274,7 +281,52 @@ void moteur_recherche(t_bibliotheque * biblio, int option)
         break;
 	}
 
-	chercher_livre_moteur(parametre, biblio, option, resultat);
-	super_pause();
+	chercher_livre_moteur(parametre, biblio, option, &pile);
+
+	nb_livres = pile.sommet;
+
+    resultat = (t_livre *)malloc(nb_livres * sizeof(t_livre));
+
+    for(i = 0; i < nb_livres; i++)
+    {
+        dernier_element = desempile(&pile);
+        resultat[i] = dernier_element;
+        printf("-------- %d --------- \n", i + 1);
+        printf("Titre: %s \n", dernier_element.titre);
+        printf("Auteur: %s %s \n", dernier_element.auteur_prenom, dernier_element.auteur_nom);
+        printf("Genre: %d \n", dernier_element.genre);
+        printf("Pages: %d \n", dernier_element.nb_pages);
+        printf("ISBN: %d \n", dernier_element.isbn);
+        printf("Emprunte: %d \n", dernier_element.bEmprunte);
+        printf("-----------------\n");
+    }
+
+    if(nb_livres < 0)
+    {
+        printf("\nAucun livre avec les parametres rentre n'a ete trouve\n");
+    }
+    else
+    {
+        printf("\n%d resultats on ete trouve\n", nb_livres + 1);
+        printf("Voulez vous demander au chariot d'aller chercher un de ces livres?\n");
+        printf("1- Oui\n");
+        printf("2- Non\n");
+        scanf("%d", &choix);
+
+        if(choix == 1)
+        {
+            printf("Quel est le numero dans la liste du livre que vous desirez?\n");
+            scanf("%d", &choix);
+
+            if(resultat[choix - 1].bEmprunte)
+            {
+                printf("\nCe livre est deja emprunte\n");
+            }
+            else
+            {
+                chariot_apporter_livre(resultat[choix - 1].isbn, biblio, tete);
+            }
+        }
+    }
 }
 

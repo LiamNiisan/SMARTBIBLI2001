@@ -126,57 +126,42 @@
 	<stdlib.h>
 	"t_biblio.h"
 
-1513106861 source:d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\main.c
+1513445660 source:d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\main.c
 	<stdio.h>
 	<stdlib.h>
-	"t_biblio.h"
-	"t_biblio_chariot.h"
-	"t_biblio_machine.h"
-	"t_biblio_robot.h"
-	"t_pile.h"
-	"t_chaine.h"
+	"lib.h"
 
-1513114311 d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio.h
+1513449595 d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio.h
+	"lib.h"
 
-1513095436 d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio_chariot.h
-	"t_biblio.h"
-	"t_chaine.h"
+1513449662 d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio_chariot.h
+	"lib.h"
 
-1513110845 d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_chaine.h
-	<stdio.h>
-	<conio.h>
-	<stdlib.h>
-	"t_biblio.h"
+1513449631 d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_chaine.h
+	"lib.h"
 
-1513111212 d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio_machine.h
-	"t_biblio.h"
-	"t_chaine.h"
+1513449366 d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio_machine.h
+	"lib.h"
 
-1513095436 d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio_robot.h
-	"t_biblio.h"
+1513449679 d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio_robot.h
+	"lib.h"
 
-1513095436 d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_pile.h
-	"t_biblio.h"
+1513449621 d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_pile.h
+	"lib.h"
 
 1513106938 source:d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_pile.c
 	"t_pile.h"
 
-1513114596 source:d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio.c
+1513445668 source:d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio.c
 	"t_biblio.h"
-	"t_pile.h"
-	<stdio.h>
-	<stdlib.h>
-	<windows.h>
 
 1513095436 source:d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio_chariot.c
 	"t_biblio_chariot.h"
 
-1513114614 source:d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio_machine.c
+1513447878 source:d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio_machine.c
 	"t_biblio_machine.h"
-	"t_biblio_chariot.h"
-	"t_chaine.h"
 
-1513097240 source:d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio_robot.c
+1513445716 source:d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_biblio_robot.c
 	"t_biblio_robot.h"
 
 1513095436 source:d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\t_chaine.c
@@ -301,4 +286,16 @@
 
 1513108556 source:c:\users\moreau\downloads\smartbibli2001-master\smartbibli2001-master\tp3_smart_biblio\t_pile.c
 	"t_pile.h"
+
+1513449858 d:\documents\ets\aut2017\inf145\tp\tp3\smartbibli2001\tp3_smart_biblio\lib.h
+	<stdio.h>
+	<conio.h>
+	<stdlib.h>
+	<windows.h>
+	"t_pile.h"
+	"t_chaine.h"
+	"t_biblio.h"
+	"t_biblio_machine.h"
+	"t_biblio_chariot.h"
+	"t_biblio_robot.h"
 

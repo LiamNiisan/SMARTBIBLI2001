@@ -1,9 +1,8 @@
-#include "t_biblio.h"
-#include "t_chaine.h"
-#include "t_pile.h"
 
-#ifndef _T_BIBLIO_MACHINE__
-#define _T_BIBLIO_MACHINE__
+#ifndef T_BIBLIO_MACHINE_H_INCLUDED
+#define T_BIBLIO_MACHINE_H_INCLUDED
+
+#include "lib.h"
 
 #define ID_MAX 1000000
 #define ID_MIN 1
@@ -41,11 +40,11 @@ void afficher_livres_chariot(t_bibliotheque * biblio, lien * tete);
 
 int afficher_menu_recherche();
 
-void rechercher_livre(t_bibliotheque * biblio);
+void rechercher_livre(t_bibliotheque * biblio, lien * tete);
 
 int afficher_menu_moteur_recherche();
 
-void moteur_recherche(t_bibliotheque * biblio, int option);
+void moteur_recherche(t_bibliotheque * biblio, int option, lien * tete);
 
 
 

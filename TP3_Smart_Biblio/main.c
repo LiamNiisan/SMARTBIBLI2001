@@ -1,12 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "t_biblio.h"
-#include "t_biblio_chariot.h"
-#include "t_biblio_machine.h"
-#include "t_biblio_robot.h"
-#include "t_pile.h"
-#include "t_chaine.h"
+#include "lib.h"
 
 
 //void remise_partielle(t_bibliotheque * pbiblio);

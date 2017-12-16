@@ -1,11 +1,4 @@
 #include "t_biblio.h"
-#include "t_pile.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <windows.h>
-
-#define FICHIERBIBLIO "biblio.txt"
 
 
 void afficher_menu_bibliotheque(t_bibliotheque * pBibli)
@@ -930,16 +923,14 @@ int retourner_livre_isbn(int isbn, t_bibliotheque * pBibli)
 }
 
 
-void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_livre * resultat)
+void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_pile * pile)
 {
     char data[100];
     int i = 0;
     int j = 0;
-    int top;
-    t_livre dernier_element;
 
-    t_pile pile;
-    init_pile(&pile);
+
+    init_pile(pile);
 
     if(verifier_disp_bibliotheque(pBibli))
     {
@@ -958,7 +949,9 @@ void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_
                     break;
 
                     case RECHERCHE_AUTEUR:
-                        strcpy(data, (pBibli->livres[i][j].auteur_prenom)); //+ " " + pBibli->livres[i][j].auteur_prenom));
+                        strcpy(data, pBibli->livres[i][j].auteur_prenom);
+                        strcat(data, " ");
+                        strcat(data, pBibli->livres[i][j].auteur_nom);
                     break;
 
                     case RECHERCHE_TITRE:
@@ -966,32 +959,12 @@ void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_
                     break;
                 }
 
-                if(strstr(param, data) != NULL)
+                if(strstr(data, param) != NULL)
                 {
-                    empile(&pile, pBibli->livres[i][j]);
+                    empile(pile, pBibli->livres[i][j]);
                 }
             }
         }
-
-        int top = pile.sommet;
-
-        resultat = (t_livre *)malloc(top * sizeof(t_livre));
-
-        for(i = 0; i < top; i++)
-        {
-            dernier_element = desempile(&pile);
-            resultat[i] = dernier_element;
-            printf("----------------- \n");
-            printf("Titre: %s \n", dernier_element.titre);
-            printf("Auteur: %s %s \n", dernier_element.auteur_prenom, dernier_element.auteur_nom);
-            printf("Genre: %d \n", dernier_element.genre);
-            printf("Pages: %d \n", dernier_element.nb_pages);
-            printf("ISBN: %d \n", dernier_element.isbn);
-            printf("Emprunte: %d \n", dernier_element.bEmprunte);
-            printf("-----------------\n");
-        }
-        super_pause();
-
     }
     else
     {

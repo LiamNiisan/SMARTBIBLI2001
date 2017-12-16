@@ -1,11 +1,7 @@
-#include "t_biblio.h"
-#include "t_pile.h"
+#include "lib.h"
 
-#ifndef _T_BIBLIO_ROBOT__
-#define _T_BIBLIO_ROBOT__
-
-
-
+#ifndef T_BIBLIO_ROBOT_H_INCLUDED
+#define T_BIBLIO_ROBOT_H_INCLUDED
 
 
 void robot_ajouter_livre(t_livre livre, t_pile * pile_robot);
