@@ -1,3 +1,6 @@
+//TP3 idee originale de Yannick Roy
+//Realiser par Badr Jaidi & Felix-Olivier Moreau
+//Pour le cours ING145
 
 #ifndef LIB_H_INCLUDED
 #define LIB_H_INCLUDED

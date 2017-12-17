@@ -299,3 +299,56 @@
 	"t_biblio_chariot.h"
 	"t_biblio_robot.h"
 
+1513522937 source:c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\t_biblio.c
+	"t_biblio.h"
+
+1513519756 c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\t_biblio.h
+	"lib.h"
+
+1513519756 c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\lib.h
+	<stdio.h>
+	<conio.h>
+	<stdlib.h>
+	<windows.h>
+	"t_pile.h"
+	"t_chaine.h"
+	"t_biblio.h"
+	"t_biblio_machine.h"
+	"t_biblio_chariot.h"
+	"t_biblio_robot.h"
+
+1513519755 c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\t_pile.h
+	"lib.h"
+
+1513519756 c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\t_chaine.h
+	"lib.h"
+
+1513533078 c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\t_biblio_machine.h
+	"lib.h"
+
+1513519756 c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\t_biblio_chariot.h
+	"lib.h"
+
+1513519755 c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\t_biblio_robot.h
+	"lib.h"
+
+1513525396 source:c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\t_biblio_chariot.c
+	"t_biblio_chariot.h"
+
+1513519756 source:c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\t_biblio_machine.c
+	"t_biblio_machine.h"
+
+1513519756 source:c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\t_chaine.c
+	"t_chaine.h"
+
+1513519755 source:c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\t_pile.c
+	"t_pile.h"
+
+1513522243 source:c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\main.c
+	<stdio.h>
+	<stdlib.h>
+	"lib.h"
+
+1513521338 source:c:\users\moreau\downloads\smartbibli2001-master (1)\smartbibli2001-master\tp3_smart_biblio\t_biblio_robot.c
+	"t_biblio_robot.h"
+

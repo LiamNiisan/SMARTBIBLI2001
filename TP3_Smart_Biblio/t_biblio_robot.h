@@ -1,3 +1,7 @@
+//TP3 idee originale de Yannick Roy
+//Realiser par Badr Jaidi & Felix-Olivier Moreau
+//Pour le cours ING145
+
 #include "lib.h"
 
 #ifndef T_BIBLIO_ROBOT_H_INCLUDED

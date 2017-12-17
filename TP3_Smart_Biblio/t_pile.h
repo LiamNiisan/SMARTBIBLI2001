@@ -1,3 +1,8 @@
+//TP3 idee originale de Yannick Roy
+//Realiser par Badr Jaidi & Felix-Olivier Moreau
+//Pour le cours ING145
+
+
 /*
 * Ce module représente une pile qui peut contenir des données d'un seul et même type
 *défini par t_element dont l'accès est dernier arrivé-premier servi (Last In First Out)

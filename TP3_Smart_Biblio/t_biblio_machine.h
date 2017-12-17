@@ -1,14 +1,24 @@
+//TP3 idee originale de Yannick Roy
+//Realiser par Badr Jaidi & Felix-Olivier Moreau
+//Pour le cours ING145
 
 #ifndef T_BIBLIO_MACHINE_H_INCLUDED
 #define T_BIBLIO_MACHINE_H_INCLUDED
 
 #include "lib.h"
 
+#define CHOIX_MIN 0
+#define CHOIX_MAX 5
+
+#define CHOIX_CHARIOT_MAX 2
+#define CHOIX_MOTEUR_MAX 4
+
 #define ID_MAX 1000000
 #define ID_MIN 1
 
 #define DATE_MIN 2000
 #define DATE_MAX 2017
+#define ANNEE 2000
 #define MAX_LIVRE 5
 
 typedef struct {

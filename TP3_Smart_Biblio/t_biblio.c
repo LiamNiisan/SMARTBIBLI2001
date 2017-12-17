@@ -1,9 +1,24 @@
+//TP3 idee originale de Yannick Roy
+//Realiser par Badr Jaidi & Felix-Olivier Moreau
+//Pour le cours ING145
+
 #include "t_biblio.h"
 
+#define DATA 100
+
+/******************************************************************************
+// afficher_menu_bibliotheque
+// ****************************************************************************
+//
+// Affiche e menu de la bibliotheque,et permet de rediriger le choix de l'usager
+//
+// Paramètres 	: t_bibliotheque * pBibli
+// Retour 		: void
+//*****************************************************************************/
 
 void afficher_menu_bibliotheque(t_bibliotheque * pBibli)
 {
-    // DÃ©claration des variables.
+    // Déclaration des variables.
 	int choix_menu = 0; //choix du menu option
 	int lecturefichier=0; //verification de la lecture fichier
 
@@ -33,12 +48,12 @@ void afficher_menu_bibliotheque(t_bibliotheque * pBibli)
 }
 
 /******************************************************************************
-//Lire_Fichier
+// Lire_Fichier
 // ****************************************************************************
 //
 // La fonction permet de lire le fichier biblio.txt qui se trouve dans le
 // dossier du programme.Ensuite, il est enregistrer dans un tableau bibli.
-// ParamÃ¨tres 	: t_bibliotheque * pBibli, int * lecture.
+// Paramètres 	: t_bibliotheque * pBibli, int * lecture.
 // Retour 		: Void.
 //*****************************************************************************/
 void lire_fichier(t_bibliotheque * pBibli, int * lecture)
@@ -142,7 +157,7 @@ void lire_fichier(t_bibliotheque * pBibli, int * lecture)
 }
 
 /******************************************************************************
-//Super_Pause
+// Super_Pause
 // ****************************************************************************
 //
 // Permet d'avoir un option "Touch Key for Continued"
@@ -154,7 +169,7 @@ void super_pause()
 }
 
 /******************************************************************************
-//retirer_sautligne
+// retirer_sautligne
 // ****************************************************************************
 //
 // Permet de garder une chaine de caracteres en une seule ligne
@@ -163,11 +178,11 @@ void retirer_sautligne(char * chaine)
 {
 	int pos = strlen(chaine) - 1;
 	if (chaine != NULL && chaine[pos] == '\n')
-		chaine[pos] = '\0'; // Si on trouve \n Ã  la fin, on le remplace par \0
+		chaine[pos] = '\0'; // Si on trouve \n à la fin, on le remplace par \0
 }
 
 /******************************************************************************
-//demander_choix_menu
+// demander_choix_menu
 // ****************************************************************************
 //
 // Fonction qui permet a l'utilisateur de choisir une option dans le menu
@@ -208,12 +223,12 @@ int demander_choix_menu(){
 
 
 /******************************************************************************
-//Initialiser_bibliotheque
+// Initialiser_bibliotheque
 // ****************************************************************************
 //
 //Permet de mettre a 0 tous les livres de tous les genres
 //
-// ParamÃ¨tres 	: t_bibliotheque * pBibli.
+// Paramètres 	: t_bibliotheque * pBibli.
 // Retour 		: Void.
 //*****************************************************************************/
 void initialiser_bibliotheque(t_bibliotheque * pBibli)
@@ -227,12 +242,12 @@ void initialiser_bibliotheque(t_bibliotheque * pBibli)
 }
 
 /******************************************************************************
-//initialiser rapport d'emprunt et de disponibilite
+// initialiser rapport d'emprunt et de disponibilite
 // ****************************************************************************
 //
 // La fonction permet de lire le fichier biblio.txt qui se trouve dans le
 // dossier du programme.Ensuite, il est enregistrer dans un tableau bibli.
-// ParamÃ¨tres 	: t_bibliotheque * pBibli.
+// Paramètres 	: t_bibliotheque * pBibli.
 // Retour 		: Void.
 //*****************************************************************************/
 void initialiser_rapport(t_bibliotheque * pBibli)
@@ -242,12 +257,12 @@ void initialiser_rapport(t_bibliotheque * pBibli)
 }
 
 /******************************************************************************
-//Sauvegarder_fichier
+// Sauvegarder_fichier
 // ****************************************************************************
 //
 // permet de prendre les modifications du tableau de bibli et de les sauvegarder
 // dans le fichier de biblio.txt
-// ParamÃ¨tres 	: t_bibliotheque * pBibli.
+// Paramètres 	: t_bibliotheque * pBibli.
 // Retour 		: Void.
 //*****************************************************************************/
 void sauvegarder_fichier(t_bibliotheque * pBibli)
@@ -260,7 +275,7 @@ void sauvegarder_fichier(t_bibliotheque * pBibli)
         int i; //variable d'incrementation
         int j; //variable d'incrementation
         int nb_livre = 0;
-        char data[100];
+        char data[DATA];
 
         fichierbiblio = fopen(BIBLIO_FICHIER,"w+"); //ouvre le fichier pour ecriture W+
 
@@ -349,7 +364,7 @@ void sauvegarder_fichier(t_bibliotheque * pBibli)
 // Cette fonction est pour le Bonus. Il permet de trier les livre en ordre
 // croissant.
 //
-// ParamÃ¨tres 	: t_bibliotheque * pBibli.
+// Paramètres 	: t_bibliotheque * pBibli.
 // Retour 		: Void.
 //*****************************************************************************/
 /*void trier_livres(t_bibliotheque * pBibli)
@@ -422,12 +437,12 @@ void sauvegarder_fichier(t_bibliotheque * pBibli)
 }*/
 
 /******************************************************************************
-//afficher_bibliotheque
+// afficher_bibliotheque
 // ****************************************************************************
 //
 //Fonction avec des boucles afin d'afficher a l'utilisateur tous les livres.
 //
-// ParamÃ¨tres 	: t_bibliotheque * pBibli.
+// Paramètres 	: t_bibliotheque * pBibli.
 // Retour 		: Void.
 //*****************************************************************************/
 void afficher_bibliotheque(t_bibliotheque * pBibli)
@@ -472,7 +487,7 @@ void afficher_bibliotheque(t_bibliotheque * pBibli)
 // Cette fonction permet d'afficher le rapport avec les informations que nous
 // avons enregistrer dans la biblio
 //
-// ParamÃ¨tres 	: t_bibliotheque * pBibli.
+// Paramètres 	: t_bibliotheque * pBibli.
 // Retour 		: Void.
 //*****************************************************************************/
 void generer_rapport(t_bibliotheque * pBibli)
@@ -485,12 +500,12 @@ void generer_rapport(t_bibliotheque * pBibli)
 }
 
 /******************************************************************************
-//emprunter_livre
+// emprunter_livre
 // ****************************************************************************
 //
 // Fonction qui permet de gerer l'emprunt des livres
 //
-// ParamÃ¨tres 	: t_bibliotheque * pBibli.
+// Paramètres 	: t_bibliotheque * pBibli.
 // Retour 		: Void.
 //*****************************************************************************/
 void emprunter_livre(t_bibliotheque * pBibli)
@@ -561,13 +576,13 @@ void emprunter_livre(t_bibliotheque * pBibli)
 }
 
 /******************************************************************************
-//gerer_retours
+// gerer_retours
 // ****************************************************************************
 //
 // Permet de remettre le rapport d'emprunt a 0
 // Permet de remettre disponible les livres de la bibliotheque
 //
-// ParamÃ¨tres 	: t_bibliotheque * pBibli.
+// Paramètres 	: t_bibliotheque * pBibli.
 // Retour 		: Void.
 //*****************************************************************************/
 void gerer_retours(t_bibliotheque * pBibli)
@@ -604,12 +619,12 @@ void gerer_retours(t_bibliotheque * pBibli)
 
 }
 /******************************************************************************
-//modifier_livre
+// modifier_livre
 // ****************************************************************************
 //
 //Cette fonction permet de choisir un livre par son ISBN et de modifier son contenue
 //
-// ParamÃ¨tres 	: t_bibliotheque * pBibli.
+// Paramètres 	: t_bibliotheque * pBibli.
 // Retour 		: Void.
 //*****************************************************************************/
 void modifier_livre(t_bibliotheque * pBibli)
@@ -701,12 +716,12 @@ void modifier_livre(t_bibliotheque * pBibli)
 
 }
 /******************************************************************************
-//retirer_livre
+// retirer_livre
 // ****************************************************************************
 //
 // Cette fonction permet de retirer un livre de la bibliotheque
 //
-// ParamÃ¨tres 	: t_bibliotheque * pBibli.
+// Paramètres 	: t_bibliotheque * pBibli.
 // Retour 		: Void.
 //*****************************************************************************/
 void retirer_livre(t_bibliotheque * pBibli)
@@ -765,13 +780,13 @@ void retirer_livre(t_bibliotheque * pBibli)
 }
 
 /******************************************************************************
-//verifier_disp_bibliotheque
+// verifier_disp_bibliotheque
 // ****************************************************************************
 //
 // Cette fonction est tres utiliser dans plusieurs des fonctions. Permet de verifier
 // si la le fichier biblio.txt a ete lu dans l'option 2 de choix menu
 //
-// ParamÃ¨tres 	: t_bibliotheque * pBibli.
+// Paramètres 	: t_bibliotheque * pBibli.
 // Retour 		: int.
 //*****************************************************************************/
 int verifier_disp_bibliotheque(t_bibliotheque * pBibli)
@@ -828,12 +843,12 @@ int chercher_livre(int isbn, t_bibliotheque * pBibli, t_livre * temp_livre)
 
 
 /******************************************************************************
-//emprunter_livre
+//  emprunter_livre
 // ****************************************************************************
 //
 // Fonction qui permet de gerer l'emprunt des livres
 //
-// ParamÃ¨tres 	: t_bibliotheque * pBibli.
+// Paramètres 	: t_bibliotheque * pBibli.
 // Retour 		: Int.
 //*****************************************************************************/
 int emprunter_livre_isbn(int isbn, t_bibliotheque * pBibli)
@@ -886,7 +901,7 @@ int emprunter_livre_isbn(int isbn, t_bibliotheque * pBibli)
 //
 // Fonction qui permet de gerer l'emprunt des livres
 //
-// ParamÃ¨tres 	: t_bibliotheque * pBibli.
+// Paramètres 	: t_bibliotheque * pBibli.
 // Retour 		: Int.
 //*****************************************************************************/
 int retourner_livre_isbn(int isbn, t_bibliotheque * pBibli)
@@ -925,7 +940,7 @@ int retourner_livre_isbn(int isbn, t_bibliotheque * pBibli)
 
 void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_pile * pile)
 {
-    char data[100];
+    char data[DATA];
     int i = 0;
     int j = 0;
 

@@ -1,9 +1,22 @@
+//TP3 idee originale de Yannick Roy
+//Realiser par Badr Jaidi & Felix-Olivier Moreau
+//Pour le cours ING145
+
 #include "t_biblio_machine.h"
 
 
 
 
-
+/******************************************************************************
+// etudiant_random_test
+// ****************************************************************************
+//
+// Cette fonction est un generateur d'etudiant qui nous permet de de generer
+// un etudiant avec un dossier aleatoire : ID et date d'inscription
+//
+// Paramètres 	: t_etudiant * etudiant
+// Retour 		: void
+//*****************************************************************************/
 
 void etudiant_random_test(t_etudiant * etudiant)
 {
@@ -12,13 +25,13 @@ void etudiant_random_test(t_etudiant * etudiant)
     int date=0;
     int id_etudiant=0;
 
-    date = rand() %(DATE_MAX - DATE_MIN);
-    date+=2000;
+    date = rand() %(DATE_MAX - DATE_MIN); //cree une date d'inscription aleatoire
+    date+=ANNEE;
     etudiant->date_etude = date;
 
 
 
-    id_etudiant = rand() % (ID_MAX - ID_MIN);
+    id_etudiant = rand() % (ID_MAX - ID_MIN); //cree un ID aleatoire
     etudiant->no_etudiant = id_etudiant;
 
     etudiant->livre_empreunter = 0;
@@ -28,6 +41,16 @@ void etudiant_random_test(t_etudiant * etudiant)
     printf("Numero permanent de l'etudiant : %d\n",etudiant->no_etudiant);
 }
 
+/******************************************************************************
+// etudiant_servir
+// ****************************************************************************
+//
+// Cette fonction permet d'avoir access au compte de l'etudiant aleatoire et ainsi
+// que toutes les demandes d'emprunts et de retours que l'etudiant peut faire
+//
+// Paramètres 	: t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete, t_pile * pile
+// Retour 		: void
+//*****************************************************************************/
 
 void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete, t_pile * pile_robot)
 {
@@ -45,7 +68,7 @@ void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete,
         printf("Entrez un numero d'etudiant valide : ");
         scanf("%d",&etudiant_id);
 	}
-	while(etudiant_id != etudiant->no_etudiant);
+	while(etudiant_id != etudiant->no_etudiant); //verifie que le numero est valide
 
 
     int choix_menu =0;
@@ -68,7 +91,16 @@ void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete,
 
 }
 
-
+/******************************************************************************
+// afficher_menu_kiosque
+// ****************************************************************************
+//
+// Cette fonction permet d'afficher le menu kiosque pour que l'utilisateur.
+//
+//
+// Paramètres 	: t_etudiant * etudiant
+// Retour 		: int
+//*****************************************************************************/
 
 int afficher_menu_kiosque(t_etudiant * etudiant)
 {
@@ -93,9 +125,18 @@ int afficher_menu_kiosque(t_etudiant * etudiant)
 	do{
         scanf("%d",&choix_user);
 
-    }while(choix_user < 0 || choix_user > 5); //limite du choix de l'utilisateur
+    }while(choix_user < CHOIX_MIN || choix_user > CHOIX_MAX); //limite du choix de l'utilisateur
 }
 
+/******************************************************************************
+// etudiant_apporter_livre
+// ****************************************************************************
+//
+// Cette fonction permet d'envoyer le chariot chercher les choix de l'etudiant
+//
+// Paramètres 	: t_bibliotheque * biblio, lien * tete, t_etudiant * etudiant
+// Retour 		: void
+//*****************************************************************************/
 
 void etudiant_apporter_livre(t_bibliotheque * biblio, lien * tete, t_etudiant * etudiant)
 {
@@ -104,6 +145,16 @@ void etudiant_apporter_livre(t_bibliotheque * biblio, lien * tete, t_etudiant * 
     scanf("%d",&isbn);
     chariot_apporter_livre(isbn, biblio, tete);
 }
+
+/******************************************************************************
+// etudiant_retour_livre
+// ****************************************************************************
+//
+// Cette fonction permet de gerer les retour de l'etudiant des livres au kiosque
+//
+// Paramètres 	: t_bibliotheque * biblio, t_pile * pile_robot
+// Retour 		: void
+//*****************************************************************************/
 
 void etudiant_retour_livre(t_bibliotheque * biblio, t_pile* pile_robot)
 {
@@ -116,7 +167,7 @@ void etudiant_retour_livre(t_bibliotheque * biblio, t_pile* pile_robot)
     printf("Entrez le ISBN du livre que vous voulez retourner a la bibliotheque : ");
     scanf("%d",&isbn);
 
-    chercher_livre(isbn,biblio,&livretemp);
+    chercher_livre(isbn,biblio,&livretemp);//cherche si le livre est valide
     printf("Vous retourner au kiosque : \n");
     printf("%s\n",livretemp.titre);
     printf("%s, ",livretemp.auteur_nom);
@@ -126,11 +177,22 @@ void etudiant_retour_livre(t_bibliotheque * biblio, t_pile* pile_robot)
 
 
 
-    empile(pile_robot,livretemp);
+    empile(pile_robot,livretemp); //empile le livre retour sur le robot
 
     super_pause();
 
 }
+
+/******************************************************************************
+// etudiant_chercher_livre
+// ****************************************************************************
+//
+//  Cette fonction permet a l'etudiant de chercher un livre dans le chariot
+//
+//
+// Paramètres 	: t_bibliotheque * biblio, lien * tete
+// Retour 		: void
+//*****************************************************************************/
 
 void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete)
 {
@@ -151,6 +213,16 @@ void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete)
 	} while (choix_menu != 0);
 }
 
+/******************************************************************************
+// etudiant_dossier
+// ****************************************************************************
+//
+// Cette fonction permet de visualiser le dossier de l'etudiant
+//
+// Paramètres 	: t_etudiant * etudiant
+// Retour 		: void
+//*****************************************************************************/
+
 void etudiant_dossier(t_etudiant * etudiant){
 
     printf("\n---Dossier---\n");
@@ -160,6 +232,16 @@ void etudiant_dossier(t_etudiant * etudiant){
     super_pause();
 }
 
+/******************************************************************************
+// afficher_menu_recherche
+// ****************************************************************************
+//
+// Cette fonction permet de chercher un livre sur le chariot ou dans la biblio
+// avec le moteur de recherche avec les shortkeys
+//
+// Paramètres 	:
+// Retour 		: int
+//*****************************************************************************/
 
 int afficher_menu_recherche()
 {
@@ -182,9 +264,18 @@ int afficher_menu_recherche()
 	do{
         scanf("%d",&choix_user);
 
-    }while(choix_user < 0 || choix_user > 2); //limite du choix de l'utilisateur
+    }while(choix_user < CHOIX_MIN || choix_user > CHOIX_CHARIOT_MAX); //limite du choix de l'utilisateur
 }
 
+/******************************************************************************
+// afficher_livres_chariot
+// ****************************************************************************
+//
+// Cette fonction permet d'afficher les livres sur le chariot
+//
+// Paramètres 	: t_bibliotheque * biblio, lien * tete
+// Retour 		: void
+//*****************************************************************************/
 
 void afficher_livres_chariot(t_bibliotheque * biblio, lien * tete)
 {
@@ -193,6 +284,15 @@ void afficher_livres_chariot(t_bibliotheque * biblio, lien * tete)
     super_pause();
 }
 
+/******************************************************************************
+// rechercher_livre
+// ****************************************************************************
+//
+//  Cette fonction permet la recherche dans le moteur de recherche
+//
+// Paramètres 	: t_bibliotheque * biblio, lien * tete
+// Retour 		: void
+//*****************************************************************************/
 
 void rechercher_livre(t_bibliotheque * biblio, lien * tete)
 {
@@ -215,7 +315,16 @@ void rechercher_livre(t_bibliotheque * biblio, lien * tete)
 	} while (choix_menu != 0);
 }
 
-
+/******************************************************************************
+// afficher_menu_moteur_recherche
+// ****************************************************************************
+//
+// Cette fonction permet d'avoir acces a un autre menu a l'interieur du moteur
+// de recherche. On peut y trouver la recherche par ISBN,Auteur,Genre et titre
+//
+// Paramètres 	:
+// Retour 		: int
+//*****************************************************************************/
 
 int afficher_menu_moteur_recherche()
 {
@@ -240,15 +349,23 @@ int afficher_menu_moteur_recherche()
 	do{
         scanf("%d",&choix_user);
 
-    }while(choix_user < 0 || choix_user > 4); //limite du choix de l'utilisateur
+    }while(choix_user < CHOIX_MIN || choix_user > CHOIX_MOTEUR_MAX); //limite du choix de l'utilisateur
 }
 
-
+/******************************************************************************
+// moteur_recherche
+// ****************************************************************************
+//
+// Cette fonction represente le coeur du moteur de recherche
+//
+// Paramètres 	: t_bibliotheque * biblio, int option, lien * tete
+// Retour 		: void
+//*****************************************************************************/
 
 void moteur_recherche(t_bibliotheque * biblio, int option, lien * tete)
 {
     char * genres[PARAMETRES_RECHERCHE] = {"ISBN", "auteur", "titre", "genre"};
-    char parametre[100];
+    char parametre[DATA];
 
     int nb_livres;
     int i;
@@ -299,8 +416,8 @@ void moteur_recherche(t_bibliotheque * biblio, int option, lien * tete)
         printf("ISBN: %d \n", dernier_element.isbn);
         printf("Emprunte: %d \n", dernier_element.bEmprunte);
         printf("-----------------\n");
-    }
 
+    }
     if(nb_livres < 0)
     {
         printf("\nAucun livre avec les parametres rentre n'a ete trouve\n");

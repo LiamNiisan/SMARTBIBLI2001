@@ -1,3 +1,8 @@
+//TP3 idee originale de Yannick Roy
+//Realiser par Badr Jaidi & Felix-Olivier Moreau
+//Pour le cours ING145
+
+
 // Exemple de gestion d'une liste chaînée simple ordonnée en ordre décroissant
 #include "lib.h"
 

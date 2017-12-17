@@ -1,8 +1,14 @@
+//TP3 idee originale de Yannick Roy
+//Realiser par Badr Jaidi & Felix-Olivier Moreau
+//Pour le cours ING145
+
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "lib.h"
 
+
+#define MAX_CHOiX 3
+#define MIN_CHOIX 0
 
 //void remise_partielle(t_bibliotheque * pbiblio);
 
@@ -14,6 +20,7 @@ int main()
 
     t_bibliotheque bibli; //fichier principale de bibliotheque
 
+    //livre pour le chariot
     t_livre * chariot_livres;
 
 
@@ -52,6 +59,16 @@ int main()
 }
 
 
+/******************************************************************************
+// afficher_menu_principale
+// ****************************************************************************
+//
+// Permet d'affichier a l'usager le menu principale
+//
+// Paramètres 	:
+// Retour 		: void
+//*****************************************************************************/
+
 void afficher_menu_principal()
 {
     system("cls");//efface l'ecran
@@ -73,8 +90,23 @@ void afficher_menu_principal()
     do{
         scanf("%d",&choix_user);
 
-    }while(choix_user < 0 || choix_user > 3); //limite du choix de l'utilisateur
+    }while(choix_user < MIN_CHOIX || choix_user > MAX_CHOiX); //limite du choix de l'utilisateur
 }
+
+
+
+
+
+/******************************************************************************
+// simulateur de remise partielle
+// ****************************************************************************
+//
+//  Cette fonction etait pour le simulateur de la remise partielle
+//
+// Paramètres 	: t_bibliotheque * pbiblio, lien * tete
+// Retour 		: void
+//*****************************************************************************/
+
 
 //remise partielle
 void simulateur(t_bibliotheque * pbiblio, lien * tete){
