@@ -21,7 +21,7 @@ t_livre chariot_apporter_livre(int ISBN, t_bibliotheque * pBibli, lien * tete)
         //etat obtien la valeur de retour de emprunter_livre_isbn
         etat = emprunter_livre_isbn(ISBN, pBibli);
 
-        sleep(vitesse);
+        Sleep(vitesse);
 
         switch (etat)
 		{

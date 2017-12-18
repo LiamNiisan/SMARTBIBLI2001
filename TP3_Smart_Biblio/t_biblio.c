@@ -187,6 +187,8 @@ void initialiser_bibliotheque(t_bibliotheque * pBibli)
     {
         pBibli->nb_livres[i] = 0;
     }
+
+    biblio_agrandir_etagere(pBibli, NB_LIVRES_MAX_RANGEE);
 }
 
 void initialiser_rapport(t_bibliotheque * pBibli)
@@ -764,6 +766,30 @@ void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_
     {
         printf("BIBLIO: Pour retirer un livre, vous devez lire le fichier de bibliotheque %s \n",FICHIERBIBLIO);
     }
+}
+
+void biblio_agrandir_etagere(t_bibliotheque * pBibli, int grandeur)
+{
+    int i = 0;
+    int j = 0;
+    t_livre temp_tab[pBibli->nb_livres_rangee];
+
+    for(i = 0; i < NB_GENRES; i++)
+    {
+        for(j = 0; j < pBibli->nb_livres_rangee; j++)
+        {
+            temp_tab[j] = pBibli->livres[i][j];
+        }
+
+        pBibli->livres[i] = (t_livre *)malloc(grandeur * sizeof(t_livre));
+
+        for(j = 0; j < pBibli->nb_livres_rangee; j++)
+        {
+            pBibli->livres[i][j] = temp_tab[j];
+        }
+    }
+
+    pBibli->nb_livres_rangee = grandeur;
 }
 
 

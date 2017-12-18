@@ -154,7 +154,7 @@ void options(t_bibliotheque * pbiblio, lien * tete)
 		switch (choix_menu)
 		{
             case 1: options_vitesse(); break;
-            case 2: printf("BOOM"); break;
+            case 2: options_etagere(pbiblio); break;
             case 0: break; // Quitter.
             default: exit(0); break;
 		}
@@ -196,5 +196,19 @@ void options_vitesse()
     chariot_set_vitesse(vitesse);
 
     printf("\nLa vitesse a ete asignee avec succes\n");
+    super_pause();
+}
+
+
+void options_etagere(t_bibliotheque * pbiblio)
+{
+    int grandeur = NB_LIVRES_MAX_RANGEE;
+
+    printf("Quel est la grandeur que vous voulez asigner aux etageres de la bibliotheque?\n");
+    scanf("%d", &grandeur);
+
+    biblio_agrandir_etagere(pbiblio, grandeur);
+
+    printf("\nLa grandeur a ete asignee avec succes\n");
     super_pause();
 }

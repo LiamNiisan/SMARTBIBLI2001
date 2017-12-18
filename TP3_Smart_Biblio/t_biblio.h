@@ -66,7 +66,7 @@ typedef struct
 
 typedef struct
 {
-	t_livre livres[NB_GENRES][NB_LIVRES_MAX_RANGEE];
+	t_livre * livres[NB_GENRES];
 	int nb_livres[NB_GENRES];
 	int nb_livres_rangee;
 	//t_pile retours;
@@ -287,6 +287,18 @@ void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_
 // Retour 		: Int.
 //*****************************************************************************/
 int retourner_livre_isbn(int isbn, t_bibliotheque * pBibli);
+
+
+/******************************************************************************
+//biblio_agrandir_etagere
+// ****************************************************************************
+//
+// Permet d'agrandir les etageres de la bibliotheque
+//
+// Paramètres 	: t_bibliotheque * pBibli, int grandeur
+// Retour 		: Void
+//*****************************************************************************/
+void biblio_agrandir_etagere(t_bibliotheque * pBibli, int grandeur);
 
 
 
