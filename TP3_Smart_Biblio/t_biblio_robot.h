@@ -8,9 +8,29 @@
 #define T_BIBLIO_ROBOT_H_INCLUDED
 
 
-void robot_ajouter_livre(t_livre livre, t_pile * pile_robot);
+/******************************************************************************
+// robot_ajouter_livre
+// ****************************************************************************
+//
+// Cette fonction permet de prendre les retours de l'usager au kiosque et
+// d'empiler ces livres dans une pile du robot
+//
+// Paramètres 	: t_livre livre, t_pile * pile_robot, lien * tete
+// Retour 		: void
+//*****************************************************************************/
+void robot_ajouter_livre(t_livre livre, t_pile * pile_robot, lien * tete);
 
-void robot_placer_livre_chariot(t_pile * pile_robot);
+
+/******************************************************************************
+// robot_placer_livre_chariot
+// ****************************************************************************
+//
+// Cette fonction permet de prendre les livres du robot et les mettre sur le chariot
+//
+// Paramètres 	: t_livre livre, t_pile * pile_robot, lien * tete
+// Retour 		: void
+//*****************************************************************************/
+void robot_placer_livre_chariot(t_pile * pile_robot, lien * tete);
 
 
 

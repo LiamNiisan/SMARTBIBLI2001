@@ -4,40 +4,28 @@
 
 #include "t_biblio_robot.h"
 
-/******************************************************************************
-// robot_ajouter_livre
-// ****************************************************************************
-//
-// Cette fonction permet de prendre les retours de l'usager au kiosque et
-// d'empiler ces livres dans une pile du robot
-//
-// Paramètres 	: t_livre livre, t_pile * pile_robot
-// Retour 		: void
-//*****************************************************************************/
 
-void robot_ajouter_livre(t_livre livre,t_pile * pile_robot){
+void robot_ajouter_livre(t_livre livre,t_pile * pile_robot, lien * tete){
 
 
 
         empile(pile_robot, livre); //empile les livres
-        super_pause();
-        robot_placer_livre_chariot(pile_robot); //si le chariot est diponible
+
+        //mettre un indiquateur qui nous permet de savoir si le chariot est la
+        while(chariot_get_pos());
+
+        robot_placer_livre_chariot(pile_robot, tete); //si le chariot est diponible
 
 
 }
 
-void robot_placer_livre_chariot(t_pile * pile_robot){
+void robot_placer_livre_chariot(t_pile * pile_robot, lien * tete){
 
     t_livre temp;
-    lien * tete;
-
-    //mettre un indiquateur qui nous permet de savoir si le chariot est la
-
 
     temp = desempile(pile_robot); //prend le livre sur le top pour le mettre sur le chariot
 
     chariot_ajouter_livre(tete,temp); // fonction qui ajoute le livre sur le chariot
-
 
 }
 

@@ -18,6 +18,8 @@
 #define TAILLE_NOM		30
 #define TAILLE_PRENOM	30
 
+#define DATA            100
+
 
 #define MAX_ISBN		9999
 
@@ -66,6 +68,7 @@ typedef struct
 {
 	t_livre livres[NB_GENRES][NB_LIVRES_MAX_RANGEE];
 	int nb_livres[NB_GENRES];
+	int nb_livres_rangee;
 	//t_pile retours;
 	t_rapport rapport;
 } t_bibliotheque;
@@ -130,19 +133,6 @@ void sauvegarder_fichier(t_bibliotheque * pBibli);
 void lire_fichier(t_bibliotheque * pBibli, int * lecture);
 
 void simuler_lire_fichier(t_bibliotheque * pBibli);
-
-
-/******************************************************************************
-//Trier_livres
-// ****************************************************************************
-//
-// Cette fonction est pour le Bonus. Il permet de trier les livre en ordre
-// croissant.
-//
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Void.
-//*****************************************************************************/
-void trier_livres(t_bibliotheque * pBibli);
 
 
 /******************************************************************************
@@ -249,11 +239,132 @@ void super_pause();
 //*****************************************************************************/
 int verifier_disp_bibliotheque(t_bibliotheque * pBibli);
 
+/******************************************************************************
+//  emprunter_livre_isbn
+// ****************************************************************************
+//
+// Permet de mettre dans temp_livre le livre auquel isbn correspond
+//
+// Paramètres 	: int isbn, t_bibliotheque * pBibli, t_livre * temp_livre
+// Retour 		: Int.
+//*****************************************************************************/
 int chercher_livre(int isbn, t_bibliotheque * pBibli, t_livre * temp_livre);
 
+
+/******************************************************************************
+//  emprunter_livre_isbn
+// ****************************************************************************
+//
+// Fonction qui permet de gerer l'emprunt des livres a partir d'un isbn
+//
+// Paramètres 	: int isbn, t_bibliotheque * pBibli.
+// Retour 		: Int.
+//*****************************************************************************/
 int emprunter_livre_isbn(int isbn, t_bibliotheque * pBibli);
 
+
+/******************************************************************************
+//  emprunter_livre_isbn
+// ****************************************************************************
+//
+// Permet de mettre dans la pile tous les livres qui correspondent aux criteres
+// de recherche, param etant le terme, et option determine si c'est par isbn,
+// genre, auteur ou titre.
+//
+// Paramètres 	: char * param, t_bibliotheque * pBibli, int option, t_pile * pile
+// Retour 		: Void
+//*****************************************************************************/
 void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_pile * pile);
+
+
+/******************************************************************************
+//retourner_livre_isbn
+// ****************************************************************************
+//
+// Fonction qui permet de gerer l'emprunt des livres a partir d'un isbn
+//
+// Paramètres 	: int isbn, t_bibliotheque * pBibli.
+// Retour 		: Int.
+//*****************************************************************************/
+int retourner_livre_isbn(int isbn, t_bibliotheque * pBibli);
+
+
+
+//Si dessous se trouvent les fonctions pour gerer les string/char
+
+
+
+/******************************************************************************
+//est_minuscule
+// ****************************************************************************
+//
+// Permet de voir si le char est minuscule
+//
+// Paramètres 	: char lettre.
+// Retour 		: Int.
+//*****************************************************************************/
+int est_minuscule(char lettre);
+
+
+/******************************************************************************
+//est_majuscule
+// ****************************************************************************
+//
+// Permet de voir si le char est majuscule
+//
+// Paramètres 	: char lettre.
+// Retour 		: Int.
+//*****************************************************************************/
+int est_majuscule(char lettre);
+
+
+/******************************************************************************
+//vers_minuscule
+// ****************************************************************************
+//
+// Permet de convertir le char en minuscule
+//
+// Paramètres 	: char lettre.
+// Retour 		: Int.
+//*****************************************************************************/
+int vers_minuscule(char lettre);
+
+
+/******************************************************************************
+//vers_majuscule
+// ****************************************************************************
+//
+// Permet de convertir le char en majuscule
+//
+// Paramètres 	: char lettre.
+// Retour 		: Int.
+//*****************************************************************************/
+int vers_majuscule(char lettre);
+
+
+/******************************************************************************
+//inverser_maj_min
+// ****************************************************************************
+//
+// Permet d'inverser majuscule/minuscule
+//
+// Paramètres 	: char lettre.
+// Retour 		: Int.
+//*****************************************************************************/
+int inverser_maj_min(char lettre);
+
+
+/******************************************************************************
+//comparer_string
+// ****************************************************************************
+//
+// Permet de savoir si param se trouve dans titre
+// meme si les chars a l'interieur sont majuscules ou minuscules
+//
+// Paramètres 	: char * param, char * titre
+// Retour 		: Int.
+//*****************************************************************************/
+int comparer_string(char * param, char * titre);
 
 
 #endif

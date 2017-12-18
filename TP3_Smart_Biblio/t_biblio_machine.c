@@ -5,19 +5,6 @@
 #include "t_biblio_machine.h"
 
 
-
-
-/******************************************************************************
-// etudiant_random_test
-// ****************************************************************************
-//
-// Cette fonction est un generateur d'etudiant qui nous permet de de generer
-// un etudiant avec un dossier aleatoire : ID et date d'inscription
-//
-// Paramètres 	: t_etudiant * etudiant
-// Retour 		: void
-//*****************************************************************************/
-
 void etudiant_random_test(t_etudiant * etudiant)
 {
     srand((unsigned)time(0));
@@ -34,27 +21,17 @@ void etudiant_random_test(t_etudiant * etudiant)
     id_etudiant = rand() % (ID_MAX - ID_MIN); //cree un ID aleatoire
     etudiant->no_etudiant = id_etudiant;
 
-    etudiant->livre_empreunter = 0;
+    etudiant->livres_empreunter = 0;
 
 
     printf("Date d'inscription : %d\n",etudiant->date_etude);
     printf("Numero permanent de l'etudiant : %d\n",etudiant->no_etudiant);
 }
 
-/******************************************************************************
-// etudiant_servir
-// ****************************************************************************
-//
-// Cette fonction permet d'avoir access au compte de l'etudiant aleatoire et ainsi
-// que toutes les demandes d'emprunts et de retours que l'etudiant peut faire
-//
-// Paramètres 	: t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete, t_pile * pile
-// Retour 		: void
-//*****************************************************************************/
 
 void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete, t_pile * pile_robot)
 {
-    int etudiant_id=0;
+    int etudiant_id = 0;
 
 
     printf("================================================================================\n");
@@ -80,10 +57,11 @@ void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete,
 
 		switch (choix_menu)
 		{
-            case 2: etudiant_retour_livre(bibli,pile_robot);break;
+            case 2: etudiant_retour_livre(bibli, pile_robot, tete, etudiant);break;
             case 1: etudiant_chercher_livre(bibli, tete);break;
             case 3: etudiant_apporter_livre(bibli, tete, etudiant);break;
             case 4: etudiant_dossier(etudiant);break;
+            case 5: etudiant_chariot_menu(etudiant, bibli, tete);break;
             case 0: break; // Quitter.
             default: exit(0); break;
 		}
@@ -91,16 +69,6 @@ void etudiant_servir(t_etudiant * etudiant, t_bibliotheque * bibli, lien * tete,
 
 }
 
-/******************************************************************************
-// afficher_menu_kiosque
-// ****************************************************************************
-//
-// Cette fonction permet d'afficher le menu kiosque pour que l'utilisateur.
-//
-//
-// Paramètres 	: t_etudiant * etudiant
-// Retour 		: int
-//*****************************************************************************/
 
 int afficher_menu_kiosque(t_etudiant * etudiant)
 {
@@ -118,81 +86,71 @@ int afficher_menu_kiosque(t_etudiant * etudiant)
 	printf("2. Retourner livre\n");
 	printf("3. Apporter livre\n");
 	printf("4. Voir Dossier de l'Etudiant\n");
+	printf("5. Regarder le chariot\n");
 	printf("0. Quitter\n\n");
 
 	printf("================================================================================\n");
 
 	do{
-        scanf("%d",&choix_user);
+        scanf("%d", &choix_user);
 
     }while(choix_user < CHOIX_MIN || choix_user > CHOIX_MAX); //limite du choix de l'utilisateur
 }
 
-/******************************************************************************
-// etudiant_apporter_livre
-// ****************************************************************************
-//
-// Cette fonction permet d'envoyer le chariot chercher les choix de l'etudiant
-//
-// Paramètres 	: t_bibliotheque * biblio, lien * tete, t_etudiant * etudiant
-// Retour 		: void
-//*****************************************************************************/
 
 void etudiant_apporter_livre(t_bibliotheque * biblio, lien * tete, t_etudiant * etudiant)
 {
     int isbn = 0;
-    printf("Entrez le ISBN du livre que vous voulez que le chariot vous apporte : ");
+    printf("Entrez le ISBN du livre que vous voulez que le chariot vous apporter : ");
     scanf("%d",&isbn);
     chariot_apporter_livre(isbn, biblio, tete);
 }
 
-/******************************************************************************
-// etudiant_retour_livre
-// ****************************************************************************
-//
-// Cette fonction permet de gerer les retour de l'etudiant des livres au kiosque
-//
-// Paramètres 	: t_bibliotheque * biblio, t_pile * pile_robot
-// Retour 		: void
-//*****************************************************************************/
 
-void etudiant_retour_livre(t_bibliotheque * biblio, t_pile* pile_robot)
+
+void etudiant_retour_livre(t_bibliotheque * biblio, t_pile * pile_robot, lien * tete, t_etudiant * etudiant)
 {
-    t_livre livretemp;
 
     int i = 0;
     int j = 0;
-    int isbn = 0;
+    int choix = 0;
 
-    printf("Entrez le ISBN du livre que vous voulez retourner a la bibliotheque : ");
-    scanf("%d",&isbn);
+    t_livre temp_livre;
 
-    chercher_livre(isbn,biblio,&livretemp);//cherche si le livre est valide
-    printf("Vous retourner au kiosque : \n");
-    printf("%s\n",livretemp.titre);
-    printf("%s, ",livretemp.auteur_nom);
-    printf("%s\n",livretemp.auteur_prenom);
-    printf("Nombre de pages : %d\n",livretemp.nb_pages);
-    printf("ISBN : %d\n\n",livretemp.isbn);
+    //afficher les livres dans le dossier de l'etudiant
+    for(i = 0; i < etudiant->livres_empreunter; i++)
+    {
+        printf("\n--------------- %d --------------- \n", i + 1);
+        printf("Titre: %s \n", etudiant->livres[i].titre);
+        printf("Auteur: %s %s \n", etudiant->livres[i].auteur_prenom, etudiant->livres[i].auteur_nom);
+        printf("Genre: %d \n", etudiant->livres[i].genre);
+        printf("Pages: %d \n", etudiant->livres[i].nb_pages);
+        printf("ISBN: %d \n", etudiant->livres[i].isbn);
+    }
 
+    printf("Quel numero de livre dans la liste voulez vous retourner?\n");
+    scanf("%d", &choix);
 
+    //On met le livre dans une variable temporelle
+    temp_livre = etudiant->livres[choix - 1];
+    //Baisser le nombre de livres dans le dossier
+    etudiant->livres_empreunter--;
 
-    empile(pile_robot,livretemp); //empile le livre retour sur le robot
+    //decaler les livres si necessaire
+    for(i = choix - 1; i < etudiant->livres_empreunter; i++)
+    {
+        etudiant->livres[i] = etudiant->livres[i + 1];
+    }
+
+    //Envoyer le livre au robot
+    robot_ajouter_livre(temp_livre, pile_robot, tete); //empile le livre retour sur le robot
+
+    printf("Le livre %s a ete retourne avec succes\n", temp_livre.titre);
 
     super_pause();
 
 }
 
-/******************************************************************************
-// etudiant_chercher_livre
-// ****************************************************************************
-//
-//  Cette fonction permet a l'etudiant de chercher un livre dans le chariot
-//
-//
-// Paramètres 	: t_bibliotheque * biblio, lien * tete
-// Retour 		: void
-//*****************************************************************************/
 
 void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete)
 {
@@ -213,35 +171,26 @@ void etudiant_chercher_livre(t_bibliotheque * biblio, lien * tete)
 	} while (choix_menu != 0);
 }
 
-/******************************************************************************
-// etudiant_dossier
-// ****************************************************************************
-//
-// Cette fonction permet de visualiser le dossier de l'etudiant
-//
-// Paramètres 	: t_etudiant * etudiant
-// Retour 		: void
-//*****************************************************************************/
 
 void etudiant_dossier(t_etudiant * etudiant){
 
+    int i = 0;
     printf("\n---Dossier---\n");
     printf("Date d'inscription : %d\n",etudiant->date_etude);
     printf("Numero permanent de l'etudiant : %d\n",etudiant->no_etudiant);
-    printf("Nombre de livre empreunte : %d\n\n",etudiant->livre_empreunter);
+    printf("Nombre de livre empreunte : %d\n\n",etudiant->livres_empreunter);
+
+    for(i = 0; i < etudiant->livres_empreunter; i++)
+    {
+        printf("Titre: %s \n", etudiant->livres[i].titre);
+        printf("Auteur: %s %s \n", etudiant->livres[i].auteur_prenom, etudiant->livres[i].auteur_nom);
+        printf("Genre: %d \n", etudiant->livres[i].genre);
+        printf("Pages: %d \n", etudiant->livres[i].nb_pages);
+        printf("ISBN: %d \n\n\n", etudiant->livres[i].isbn);
+    }
     super_pause();
 }
 
-/******************************************************************************
-// afficher_menu_recherche
-// ****************************************************************************
-//
-// Cette fonction permet de chercher un livre sur le chariot ou dans la biblio
-// avec le moteur de recherche avec les shortkeys
-//
-// Paramètres 	:
-// Retour 		: int
-//*****************************************************************************/
 
 int afficher_menu_recherche()
 {
@@ -267,15 +216,6 @@ int afficher_menu_recherche()
     }while(choix_user < CHOIX_MIN || choix_user > CHOIX_CHARIOT_MAX); //limite du choix de l'utilisateur
 }
 
-/******************************************************************************
-// afficher_livres_chariot
-// ****************************************************************************
-//
-// Cette fonction permet d'afficher les livres sur le chariot
-//
-// Paramètres 	: t_bibliotheque * biblio, lien * tete
-// Retour 		: void
-//*****************************************************************************/
 
 void afficher_livres_chariot(t_bibliotheque * biblio, lien * tete)
 {
@@ -284,19 +224,10 @@ void afficher_livres_chariot(t_bibliotheque * biblio, lien * tete)
     super_pause();
 }
 
-/******************************************************************************
-// rechercher_livre
-// ****************************************************************************
-//
-//  Cette fonction permet la recherche dans le moteur de recherche
-//
-// Paramètres 	: t_bibliotheque * biblio, lien * tete
-// Retour 		: void
-//*****************************************************************************/
 
 void rechercher_livre(t_bibliotheque * biblio, lien * tete)
 {
-    int choix_menu =0;
+    int choix_menu = 0;
 
 	do
 	{
@@ -315,16 +246,7 @@ void rechercher_livre(t_bibliotheque * biblio, lien * tete)
 	} while (choix_menu != 0);
 }
 
-/******************************************************************************
-// afficher_menu_moteur_recherche
-// ****************************************************************************
-//
-// Cette fonction permet d'avoir acces a un autre menu a l'interieur du moteur
-// de recherche. On peut y trouver la recherche par ISBN,Auteur,Genre et titre
-//
-// Paramètres 	:
-// Retour 		: int
-//*****************************************************************************/
+
 
 int afficher_menu_moteur_recherche()
 {
@@ -352,15 +274,6 @@ int afficher_menu_moteur_recherche()
     }while(choix_user < CHOIX_MIN || choix_user > CHOIX_MOTEUR_MAX); //limite du choix de l'utilisateur
 }
 
-/******************************************************************************
-// moteur_recherche
-// ****************************************************************************
-//
-// Cette fonction represente le coeur du moteur de recherche
-//
-// Paramètres 	: t_bibliotheque * biblio, int option, lien * tete
-// Retour 		: void
-//*****************************************************************************/
 
 void moteur_recherche(t_bibliotheque * biblio, int option, lien * tete)
 {
@@ -424,7 +337,7 @@ void moteur_recherche(t_bibliotheque * biblio, int option, lien * tete)
     }
     else
     {
-        printf("\n%d resultats on ete trouve\n", nb_livres + 1);
+        printf("\n%d resultats on ete trouve\n", nb_livres);
         printf("Voulez vous demander au chariot d'aller chercher un de ces livres?\n");
         printf("1- Oui\n");
         printf("2- Non\n");
@@ -445,5 +358,82 @@ void moteur_recherche(t_bibliotheque * biblio, int option, lien * tete)
             }
         }
     }
+
 }
+
+void etudiant_chariot_menu(t_etudiant * etudiant, t_bibliotheque * biblio, lien * tete)
+{
+    int choix_menu =0;
+
+	do
+	{
+	    // Gestion du menu.
+		choix_menu = afficher_chariot_menu();
+
+		switch (choix_menu)
+		{
+            case 1: chariot_retourner_livres(tete, biblio);break;
+            case 2: afficher_livres_chariot(biblio, tete);break;
+            case 3: etudiant_emprunter_livre_chariot(etudiant, biblio, tete);break;
+            case 0: break; // Quitter.
+            default: exit(0); break;
+		}
+	} while (choix_menu != 0);
+}
+
+
+
+int afficher_chariot_menu()
+{
+    system("cls");//efface l'ecran
+
+    int choix_user=0; //variable pour le choix
+
+
+    printf("================================================================================\n");
+	printf("                                Kiosque Biblio Virtuel: Menu chariot\n");
+	printf("================================================================================\n");
+
+    printf("\n\n--------- Chariot ---------\n\n");
+	printf("1. Retourner tous les livres\n");
+	printf("2. Regarder le chariot\n");
+	printf("3. Emprunter un livre sur le chariot\n");
+	printf("0. Quitter\n\n");
+
+	printf("================================================================================\n");
+
+	do{
+        scanf("%d",&choix_user);
+
+    }while(choix_user < CHOIX_MIN || choix_user > CHOIX_CHARIOT_MENU); //limite du choix de l'utilisateur
+}
+
+
+void etudiant_emprunter_livre_chariot(t_etudiant * etudiant, t_bibliotheque * biblio, lien * tete)
+{
+    int isbn = 0;
+
+    afficher_livres_chariot(biblio, tete);
+
+
+    printf("\nVeuillez entrer le ISBN du livre que vous voulez emprunter du chariot\n");
+    scanf("%d", &isbn);
+
+    //S'assurer que l'etudiant peut toujours empreunter
+    if(etudiant->livres_empreunter < MAX_LIVRE)
+    {
+        //Modifier le dossier de l'etudiant en consequence et retirer le livre du chariot
+        etudiant->livres[etudiant->livres_empreunter] = chariot_retirer_livre(tete, isbn, biblio);;
+        etudiant->livres_empreunter++;
+
+        printf("\nle livre %s a ete emprunte avec succes\n", etudiant->livres[etudiant->livres_empreunter - 1].titre);
+    }
+    else
+    {
+        printf("Vous avez deja 5 livres\n");
+    }
+
+    super_pause();
+}
+
 

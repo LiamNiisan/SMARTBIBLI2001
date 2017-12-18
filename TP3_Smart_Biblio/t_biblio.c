@@ -4,18 +4,6 @@
 
 #include "t_biblio.h"
 
-#define DATA 100
-
-/******************************************************************************
-// afficher_menu_bibliotheque
-// ****************************************************************************
-//
-// Affiche e menu de la bibliotheque,et permet de rediriger le choix de l'usager
-//
-// Paramètres 	: t_bibliotheque * pBibli
-// Retour 		: void
-//*****************************************************************************/
-
 void afficher_menu_bibliotheque(t_bibliotheque * pBibli)
 {
     // Déclaration des variables.
@@ -47,15 +35,7 @@ void afficher_menu_bibliotheque(t_bibliotheque * pBibli)
 
 }
 
-/******************************************************************************
-// Lire_Fichier
-// ****************************************************************************
-//
-// La fonction permet de lire le fichier biblio.txt qui se trouve dans le
-// dossier du programme.Ensuite, il est enregistrer dans un tableau bibli.
-// Paramètres 	: t_bibliotheque * pBibli, int * lecture.
-// Retour 		: Void.
-//*****************************************************************************/
+
 void lire_fichier(t_bibliotheque * pBibli, int * lecture)
 {
 
@@ -156,39 +136,19 @@ void lire_fichier(t_bibliotheque * pBibli, int * lecture)
     *lecture = cycle;
 }
 
-/******************************************************************************
-// Super_Pause
-// ****************************************************************************
-//
-// Permet d'avoir un option "Touch Key for Continued"
-//*****************************************************************************/
+
 void super_pause()
 {
 	printf("Appuyez sur une touche pour continuer! \n");
 	_getch();
 }
 
-/******************************************************************************
-// retirer_sautligne
-// ****************************************************************************
-//
-// Permet de garder une chaine de caracteres en une seule ligne
-//*****************************************************************************/
 void retirer_sautligne(char * chaine)
 {
 	int pos = strlen(chaine) - 1;
 	if (chaine != NULL && chaine[pos] == '\n')
 		chaine[pos] = '\0'; // Si on trouve \n à la fin, on le remplace par \0
 }
-
-/******************************************************************************
-// demander_choix_menu
-// ****************************************************************************
-//
-// Fonction qui permet a l'utilisateur de choisir une option dans le menu
-// integration d'une limite si les choix sont hors demande
-// Retour 		: Void.
-//*****************************************************************************/
 
 
 int demander_choix_menu(){
@@ -204,11 +164,8 @@ int demander_choix_menu(){
 	printf("2 - Lire Fichier Bibliotheque\n");
 	printf("3 - Modifier Livre\n");
 	printf("4 - Retirer Livre\n");
-	//printf("5 - Emprunter Livre\n");
-	//printf("6 - Retourner Livre (Lundi Matin)\n");
 	printf("5 - Generer Rapport\n");
 	printf("6 - Sauvegarder Bibliotheque\n");
-	//printf("9 - Trier Livres (bonus)\n");
     printf("0 - Quitter");
     printf("\n\n");
 
@@ -222,15 +179,6 @@ int demander_choix_menu(){
 }
 
 
-/******************************************************************************
-// Initialiser_bibliotheque
-// ****************************************************************************
-//
-//Permet de mettre a 0 tous les livres de tous les genres
-//
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Void.
-//*****************************************************************************/
 void initialiser_bibliotheque(t_bibliotheque * pBibli)
 {
     int i;
@@ -241,30 +189,12 @@ void initialiser_bibliotheque(t_bibliotheque * pBibli)
     }
 }
 
-/******************************************************************************
-// initialiser rapport d'emprunt et de disponibilite
-// ****************************************************************************
-//
-// La fonction permet de lire le fichier biblio.txt qui se trouve dans le
-// dossier du programme.Ensuite, il est enregistrer dans un tableau bibli.
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Void.
-//*****************************************************************************/
 void initialiser_rapport(t_bibliotheque * pBibli)
 {
     pBibli->rapport.nb_livres_dispo=0;
     pBibli->rapport.nb_livres_emprunt=0;
 }
 
-/******************************************************************************
-// Sauvegarder_fichier
-// ****************************************************************************
-//
-// permet de prendre les modifications du tableau de bibli et de les sauvegarder
-// dans le fichier de biblio.txt
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Void.
-//*****************************************************************************/
 void sauvegarder_fichier(t_bibliotheque * pBibli)
 {
 
@@ -357,94 +287,7 @@ void sauvegarder_fichier(t_bibliotheque * pBibli)
 
 }
 
-/******************************************************************************
-//Trier_livres
-// ****************************************************************************
-//
-// Cette fonction est pour le Bonus. Il permet de trier les livre en ordre
-// croissant.
-//
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Void.
-//*****************************************************************************/
-/*void trier_livres(t_bibliotheque * pBibli)
-{
-    if(verifier_disp_bibliotheque(pBibli))
-    {
-        t_pile pile_livres;
-        t_livre dernier_element;
-        int dernier_isbn;
-        int i;
-        int j;
-        int k;
-        int nombre_livres = 0;
 
-        init_pile(&pile_livres);
-
-        dernier_element.isbn = 0;//initialiser le dernier element pour etre sur que tout va etre compare a la plus petite valeur possible
-        empile(&pile_livres, dernier_element);//mettre la plus petite valeur possible dans la pile au debut pour pouvoir la comparer
-        dernier_isbn = MAX_ISBN;//initialiser le dernier ISBN a la valeur max pour que le premier ISBN puisse etre enregistre
-
-
-        nombre_livres = pBibli->rapport.nb_livres_dispo + pBibli->rapport.nb_livres_emprunt;//le nombre de livres total, donc livres disponibles et empruntes
-
-        for(k = 0; k < nombre_livres; k++) //boucle pour comparer tout les livres un par un
-        {
-            empile(&pile_livres, dernier_element);//etre sur de comparer a la plus petite valeur possible
-
-            //on compare chacun des livres a tout les autres livres pour touver qui est plus grand
-            for(i = 0; i < NB_GENRES; i++)
-            {
-                for(j = 0; j < pBibli->nb_livres[i]; j++)
-                {
-                    //Si il est plus grand que le livre dans la pile et plus petit que celui qui etait la avant, on sait que il est a la bonne place
-                    if((getSansEnlever(&pile_livres).isbn < pBibli->livres[i][j].isbn) && (pBibli->livres[i][j].isbn < dernier_isbn))
-                    {
-                        //on remplace dans la pile par celui qui est plus grand
-                        desempile(&pile_livres);
-                        empile(&pile_livres, pBibli->livres[i][j]);
-                    }
-                }
-            }
-
-            dernier_isbn = getSansEnlever(&pile_livres).isbn;//mettre le dernier livre rajouter pour etre sur que celui qui va suivre ne va pas etre plus grand
-        }
-
-        //Les livres sont affiches un par un en ordre croissant a partir de la pile
-        for(i = 0; i < nombre_livres; i++)
-        {
-            dernier_element = desempile(&pile_livres);
-            printf("----------------- \n");
-            printf("Titre: %s \n", dernier_element.titre);
-            printf("Auteur: %s %s \n", dernier_element.auteur_prenom, dernier_element.auteur_nom);
-            printf("Genre: %d \n", dernier_element.genre);
-            printf("Pages: %d \n", dernier_element.nb_pages);
-            printf("ISBN: %d \n", dernier_element.isbn);
-            printf("Emprunte: %d \n", dernier_element.bEmprunte);
-            printf("-----------------\n");
-        }
-
-        printf("\nLes livres on ete trie par ordre croissant de ISBN\n");
-        super_pause();
-
-    }
-    //ce message est si la lecture de bibliotecque n'a pas ete fait
-    else
-    {
-        printf("Impossible de trier la bibliotheque... Veuillez lire le fichier %s avant de trier\n",FICHIERBIBLIO);
-        super_pause();
-    }
-}*/
-
-/******************************************************************************
-// afficher_bibliotheque
-// ****************************************************************************
-//
-//Fonction avec des boucles afin d'afficher a l'utilisateur tous les livres.
-//
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Void.
-//*****************************************************************************/
 void afficher_bibliotheque(t_bibliotheque * pBibli)
 {
     int i; //variable d'incrementation
@@ -480,16 +323,7 @@ void afficher_bibliotheque(t_bibliotheque * pBibli)
     super_pause();
 }
 
-/******************************************************************************
-//Generer rapport
-// ****************************************************************************
-//
-// Cette fonction permet d'afficher le rapport avec les informations que nous
-// avons enregistrer dans la biblio
-//
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Void.
-//*****************************************************************************/
+
 void generer_rapport(t_bibliotheque * pBibli)
 {
     printf("#######################################\n");
@@ -499,15 +333,7 @@ void generer_rapport(t_bibliotheque * pBibli)
     super_pause();
 }
 
-/******************************************************************************
-// emprunter_livre
-// ****************************************************************************
-//
-// Fonction qui permet de gerer l'emprunt des livres
-//
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Void.
-//*****************************************************************************/
+
 void emprunter_livre(t_bibliotheque * pBibli)
 {
     int isbn=0;
@@ -575,16 +401,7 @@ void emprunter_livre(t_bibliotheque * pBibli)
 	super_pause();
 }
 
-/******************************************************************************
-// gerer_retours
-// ****************************************************************************
-//
-// Permet de remettre le rapport d'emprunt a 0
-// Permet de remettre disponible les livres de la bibliotheque
-//
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Void.
-//*****************************************************************************/
+
 void gerer_retours(t_bibliotheque * pBibli)
 {
     int i=0; //variable d'incrementation
@@ -618,15 +435,8 @@ void gerer_retours(t_bibliotheque * pBibli)
     super_pause();
 
 }
-/******************************************************************************
-// modifier_livre
-// ****************************************************************************
-//
-//Cette fonction permet de choisir un livre par son ISBN et de modifier son contenue
-//
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Void.
-//*****************************************************************************/
+
+
 void modifier_livre(t_bibliotheque * pBibli)
 {
     int resultat = 0; //varible qui permet d'avoir des conditions
@@ -715,15 +525,8 @@ void modifier_livre(t_bibliotheque * pBibli)
 
 
 }
-/******************************************************************************
-// retirer_livre
-// ****************************************************************************
-//
-// Cette fonction permet de retirer un livre de la bibliotheque
-//
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Void.
-//*****************************************************************************/
+
+
 void retirer_livre(t_bibliotheque * pBibli)
 {
         //si la lecture du fichier biblio.txt a ete lu
@@ -779,16 +582,6 @@ void retirer_livre(t_bibliotheque * pBibli)
         }
 }
 
-/******************************************************************************
-// verifier_disp_bibliotheque
-// ****************************************************************************
-//
-// Cette fonction est tres utiliser dans plusieurs des fonctions. Permet de verifier
-// si la le fichier biblio.txt a ete lu dans l'option 2 de choix menu
-//
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: int.
-//*****************************************************************************/
 int verifier_disp_bibliotheque(t_bibliotheque * pBibli)
 {
     int i; //variable d'incrementation
@@ -841,16 +634,6 @@ int chercher_livre(int isbn, t_bibliotheque * pBibli, t_livre * temp_livre)
     }
 }
 
-
-/******************************************************************************
-//  emprunter_livre
-// ****************************************************************************
-//
-// Fonction qui permet de gerer l'emprunt des livres
-//
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Int.
-//*****************************************************************************/
 int emprunter_livre_isbn(int isbn, t_bibliotheque * pBibli)
 {
     int i=0; //variable d'incrementation
@@ -895,15 +678,6 @@ int emprunter_livre_isbn(int isbn, t_bibliotheque * pBibli)
 }
 
 
-/******************************************************************************
-//retourner_livre
-// ****************************************************************************
-//
-// Fonction qui permet de gerer l'emprunt des livres
-//
-// Paramètres 	: t_bibliotheque * pBibli.
-// Retour 		: Int.
-//*****************************************************************************/
 int retourner_livre_isbn(int isbn, t_bibliotheque * pBibli)
 {
     int i=0; //variable d'incrementation
@@ -974,7 +748,12 @@ void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_
                     break;
                 }
 
-                if(strstr(data, param) != NULL)
+                /*if(strstr(data, param) != NULL)
+                {
+                    empile(pile, pBibli->livres[i][j]);
+                }*/
+
+                if(comparer_string(param, data))
                 {
                     empile(pile, pBibli->livres[i][j]);
                 }
@@ -986,5 +765,95 @@ void chercher_livre_moteur(char * param, t_bibliotheque * pBibli, int option, t_
         printf("BIBLIO: Pour retirer un livre, vous devez lire le fichier de bibliotheque %s \n",FICHIERBIBLIO);
     }
 }
+
+
+int est_minuscule(char lettre)
+{
+    //regarder si la valeur ascii de la lettre est minuscule
+    if(lettre >= 'a' && lettre <= 'z')
+        return 1;
+    else
+        return 0;
+}
+
+int est_majuscule(char lettre)
+{
+    //regarder si la valeur ascii de la lettre est majuscule
+    if(lettre >= 'A' && lettre <= 'B')
+        return 1;
+    else
+        return 0;
+}
+
+int vers_majuscule(char lettre)
+{
+    //difference de 32 entre les deux
+    return lettre - 32;
+}
+
+
+int vers_minuscule(char lettre)
+{
+    //difference de 32 entre les deux
+    return lettre + 32;
+}
+
+int inverser_maj_min(char lettre)
+{
+    if(est_majuscule(lettre))
+    {
+        return vers_minuscule(lettre);
+    }
+    else if(est_minuscule(lettre))
+    {
+        return vers_majuscule(lettre);
+    }
+
+    return lettre;
+}
+
+
+int comparer_string(char * param, char * titre)
+{
+    int i = 0;
+    int j = 0;
+    int pareil = 1;
+    char char_inv;
+
+    while(titre[i] != '\0')
+    {
+        pareil = 1;
+        j = 0;
+
+        //On regarde chacune des positions dans la chaine si elle correspond au parametre de recherche
+        while(param[j] != '\0')
+        {
+            //Pour ne pas perdre de temps
+            if(pareil)
+            {
+                if(param[j] != titre[i + j])
+                {
+                    char_inv = inverser_maj_min(param[j]);
+                    if(char_inv != titre[i + j])
+                    {
+                        //Si un des chars n'est pas egal, c'est automatiquement considere non egal, on attend alors le prochain
+                        //tour de boucle pour retester
+                        pareil = 0;
+                    }
+                }
+            }
+            j++;
+        }
+
+        if(pareil)
+        {
+            //Si c'est pareil une fois alors automatiquement c'est bon donc on peux sortir
+            return pareil;
+        }
+        i++;
+    }
+    return NULL;
+}
+
 
 
