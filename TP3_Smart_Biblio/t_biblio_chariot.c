@@ -1,5 +1,5 @@
 //TP3 idee originale de Yannick Roy
-//Realiser par Badr Jaidi & Felix-Olivier Moreau
+//Realiser par Badr Jaidi (JAIB06029608) & Felix-Olivier Moreau (MORF30059700)
 //Pour le cours ING145
 
 #include "t_biblio_chariot.h"
@@ -32,8 +32,8 @@ t_livre chariot_apporter_livre(int ISBN, t_bibliotheque * pBibli, lien * tete)
                     printf("CHARIOT: Le livre \"%s\" a ete rajouter au chariot\n", temp_livre.titre);
                 }
                 break;
-            case LIVRE_NON_DISPONIBLE: printf("CHARIOT: Le livre est non disponible"); break;
-            case LIVRE_INTROUVABLE: printf("CHARIOT: Le livre est introuvable"); break;
+            case LIVRE_NON_DISPONIBLE: printf("CHARIOT: Le livre est non disponible\n"); break;
+            case LIVRE_INTROUVABLE: printf("CHARIOT: Le livre est introuvable\n"); break;
 		}
 
     }

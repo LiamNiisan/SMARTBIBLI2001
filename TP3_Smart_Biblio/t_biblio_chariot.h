@@ -1,5 +1,5 @@
 //TP3 idee originale de Yannick Roy
-//Realiser par Badr Jaidi & Felix-Olivier Moreau
+//Realiser par Badr Jaidi (JAIB06029608) & Felix-Olivier Moreau (MORF30059700)
 //Pour le cours ING145
 
 #include "lib.h"

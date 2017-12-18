@@ -1,5 +1,5 @@
 //TP3 idee originale de Yannick Roy
-//Realiser par Badr Jaidi & Felix-Olivier Moreau
+//Realiser par Badr Jaidi (JAIB06029608) & Felix-Olivier Moreau (MORF30059700)
 //Pour le cours ING145
 
 #include "t_biblio_machine.h"
@@ -128,8 +128,13 @@ void etudiant_retour_livre(t_bibliotheque * biblio, t_pile * pile_robot, lien * 
         printf("ISBN: %d \n", etudiant->livres[i].isbn);
     }
 
-    printf("Quel numero de livre dans la liste voulez vous retourner?\n");
-    scanf("%d", &choix);
+
+    do
+    {
+        printf("Quel numero de livre dans la liste voulez vous retourner?\n");
+        scanf("%d", &choix);
+    }
+    while(choix < CHOIX_MIN + 1 || choix > etudiant->livres_empreunter);
 
     //On met le livre dans une variable temporelle
     temp_livre = etudiant->livres[choix - 1];
@@ -346,7 +351,12 @@ void moteur_recherche(t_bibliotheque * biblio, int option, lien * tete)
         if(choix == 1)
         {
             printf("Quel est le numero dans la liste du livre que vous desirez?\n");
-            scanf("%d", &choix);
+            do
+            {
+                scanf("%d", &choix);
+            }
+            while(choix < CHOIX_MIN + 1 || choix > nb_livres);
+
 
             if(resultat[choix - 1].bEmprunte)
             {
