@@ -1,12 +1,12 @@
 //TP3 idee originale de Yannick Roy
 //Realiser par Badr Jaidi (JAIB06029608) & Felix-Olivier Moreau (MORF30059700)
-//Pour le cours ING145
+//Pour le cours IN145
 
 #include "t_biblio.h"
 
 void afficher_menu_bibliotheque(t_bibliotheque * pBibli)
 {
-    // Déclaration des variables.
+    // DÃ©claration des variables.
 	int choix_menu = 0; //choix du menu option
 	int lecturefichier=0; //verification de la lecture fichier
 
@@ -147,7 +147,7 @@ void retirer_sautligne(char * chaine)
 {
 	int pos = strlen(chaine) - 1;
 	if (chaine != NULL && chaine[pos] == '\n')
-		chaine[pos] = '\0'; // Si on trouve \n à la fin, on le remplace par \0
+		chaine[pos] = '\0'; // Si on trouve \n Ã  la fin, on le remplace par \0
 }
 
 
