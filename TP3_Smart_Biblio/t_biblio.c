@@ -1,6 +1,6 @@
 //TP3 idee originale de Yannick Roy
 //Realiser par Badr Jaidi (JAIB06029608) & Felix-Olivier Moreau (MORF30059700)
-//Pour le cours IN145
+//Pour le cours INF145
 
 #include "t_biblio.h"
 
